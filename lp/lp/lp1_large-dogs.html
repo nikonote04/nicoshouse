@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>にこの家｜大型犬と泊まれる宿・秩父（体重・犬種制限なし）</title>
+<meta name="description" content="体重制限なし・犬種制限なし・ケージ不要。大型犬とのびのび過ごせる秩父の一棟貸しの宿「にこの家」。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Zen+Maru+Gothic:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light only;
+  --ink:#2B2823;
+  --gray:#55514A;
+  --accent:#8FA382;
+  --btn:#D0722F;
+  --btn-hover:#B35F22;
+  --bg:#FFFFFF;
+  --bg-sub:#FAF7F1;
+  --line:#DDD9D0;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Zen Kaku Gothic New',sans-serif;color:var(--ink) !important;background:#FFFFFF !important;line-height:2;font-size:16px;letter-spacing:.04em}
+img{max-width:100%;display:block}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+
+/* 写真プレースホルダー（実写真に差し替え） */
+.ph{background:var(--bg-sub);border:1px dashed var(--line);border-radius:16px;display:flex;align-items:center;justify-content:center;color:var(--gray);font-size:.85rem;letter-spacing:.1em;text-align:center;padding:12px}
+.ph::before{content:"📷 ";margin-right:6px}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.95);border-bottom:1px solid var(--line)}
+.nav{display:flex;justify-content:space-between;align-items:center;height:60px}
+.logo{font-family:'Zen Maru Gothic',sans-serif;font-weight:600;font-size:1.2rem;color:var(--ink);text-decoration:none;letter-spacing:.15em}
+.nav-cta{background:var(--btn);color:#fff !important;text-decoration:none;padding:9px 26px;font-size:.85rem;font-weight:700;letter-spacing:.1em;border-radius:999px;transition:background .2s}
+.nav-cta:hover{background:var(--btn-hover)}
+
+/* hero */
+.hero{position:relative}
+.hero .ph{height:min(72vh,560px)}
+.hero-copy{text-align:center;padding:56px 24px 0}
+.hero-copy h1{font-family:'Zen Maru Gothic',sans-serif;font-weight:600;font-size:clamp(1.6rem,4.5vw,2.4rem);line-height:1.9;letter-spacing:.12em}
+.hero-copy p{margin-top:16px;color:var(--gray);font-size:.95rem;letter-spacing:.08em}
+
+/* section common */
+section{padding:80px 0}
+.label{text-align:center;margin-bottom:48px}
+.label .en{display:block;font-size:.75rem;letter-spacing:.35em;color:var(--accent);text-transform:uppercase;margin-bottom:8px}
+.label .ja{font-family:'Zen Maru Gothic',sans-serif;font-weight:600;font-size:clamp(1.3rem,3.2vw,1.7rem);letter-spacing:.15em}
+
+/* concept */
+.concept{text-align:center}
+.concept p{max-width:36em;margin:0 auto 1.4em}
+
+/* features */
+.features{background:var(--bg-sub)}
+.feature{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-bottom:72px}
+.feature:last-child{margin-bottom:0}
+.feature .ph{height:300px}
+.feature:nth-child(even) .f-img{order:2}
+.num{font-family:'Zen Maru Gothic',sans-serif;color:var(--accent);font-size:.9rem;letter-spacing:.3em;margin-bottom:12px}
+.feature h3{font-family:'Zen Maru Gothic',sans-serif;font-weight:600;font-size:1.25rem;letter-spacing:.1em;margin-bottom:16px;line-height:1.7}
+.feature p{color:var(--gray);font-size:.95rem}
+@media(max-width:720px){.feature{grid-template-columns:1fr;gap:24px}.feature:nth-child(even) .f-img{order:0}}
+
+/* rules */
+.rules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.rule{background:#fff;padding:32px 20px;text-align:center}
+.rule .t{font-family:'Zen Maru Gothic',sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:.1em;margin-bottom:8px}
+.rule .d{color:var(--gray);font-size:.88rem}
+
+/* access */
+.access-inner{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.access .ph{height:280px}
+.access h3{font-family:'Zen Maru Gothic',sans-serif;font-weight:600;font-size:1.1rem;margin-bottom:12px;letter-spacing:.1em}
+.access p{color:var(--gray);font-size:.95rem;margin-bottom:20px}
+@media(max-width:720px){.access-inner{grid-template-columns:1fr}}
+
+/* cta */
+.cta{background:var(--bg-sub);text-align:center}
+.cta h2{font-family:'Zen Maru Gothic',sans-serif;font-weight:600;font-size:clamp(1.3rem,3.5vw,1.8rem);letter-spacing:.12em;line-height:1.9;margin-bottom:32px}
+.btn{display:inline-block;background:var(--btn);color:#fff !important;text-decoration:none;padding:18px 64px;font-size:1rem;font-weight:700;letter-spacing:.15em;border-radius:999px;box-shadow:0 4px 14px rgba(208,114,47,.35);transition:background .2s,transform .15s}
+.btn:hover{background:var(--btn-hover);transform:translateY(-1px)}
+.btn-note{display:block;margin-top:14px;font-size:.82rem;color:var(--gray)}
+
+footer{border-top:1px solid var(--line);text-align:center;padding:32px 24px;font-size:.8rem;color:var(--gray);letter-spacing:.08em}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* welcome badge */
+.welcome{display:block;color:var(--btn);font-family:'Zen Maru Gothic',sans-serif;font-weight:700;letter-spacing:.15em;font-size:clamp(1.05rem,3vw,1.3rem);margin-bottom:16px}
+/* empathy section */
+.empathy{background:#FFFFFF;padding-top:0}
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-bottom:44px}
+.q{background:var(--bg-sub);border-radius:16px;padding:28px 24px;font-size:.95rem;color:var(--ink);line-height:1.9}
+.q::before{content:"”";font-family:'Zen Maru Gothic',sans-serif;font-size:2.2rem;color:var(--btn);line-height:1;display:block;margin-bottom:6px}
+.answer{text-align:center;font-family:'Zen Maru Gothic',sans-serif;font-weight:700;font-size:clamp(1.15rem,3.2vw,1.5rem);color:var(--btn);line-height:2.1}
+.sp{display:none}
+@media(max-width:600px){.sp{display:inline}}
+
+/* === emo upgrade === */
+.label .en{font-family:'Caveat',cursive;font-size:1.5rem;letter-spacing:.04em;text-transform:none;color:var(--btn);margin-bottom:4px}
+.mk{background:linear-gradient(transparent 60%,rgba(224,138,78,.4) 60%);padding:0 .06em;border-radius:2px}
+.hero-copy h1{font-size:clamp(1.8rem,5vw,2.7rem)}
+.features{border-radius:44px;margin:0 14px}
+.cta{border-radius:44px;margin:0 14px 24px}
+.q{box-shadow:0 8px 22px rgba(43,40,35,.06)}
+.feature .ph,.access .ph{border-radius:24px}
+.hero .ph{border-radius:0 0 44px 44px;border-top:none}
+.fadein{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.22,.6,.3,1),transform .9s cubic-bezier(.22,.6,.3,1)}
+.fadein.show{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.fadein{opacity:1!important;transform:none!important;transition:none!important}}
+
+/* === chichibu marquee === */
+.chichibu{padding:80px 0;overflow:hidden}
+.chi-lead{text-align:center;color:var(--gray);margin:-28px auto 44px;font-size:.95rem;padding:0 24px;max-width:36em}
+.marquee{overflow:hidden;width:100%}
+.m-track{display:flex;gap:20px;width:max-content}
+.m-card{width:250px;flex-shrink:0;margin:0}
+.m-card .ph{height:175px;border-radius:20px;font-size:.78rem}
+.m-card figcaption{text-align:center;margin-top:10px;font-size:.9rem;color:var(--ink);font-weight:500;letter-spacing:.06em}
+@keyframes scrollx{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.m-track{animation:none}.marquee{overflow-x:auto;-webkit-overflow-scrolling:touch}}
+
+.m-photo{width:100%;height:175px;object-fit:cover;border-radius:20px;display:block}
+.f-photo{width:100%;height:300px;object-fit:cover;border-radius:24px;display:block}
+.f-video{width:100%;height:300px;object-fit:cover;border-radius:24px;display:block;background:#000}
+
+/* === google map === */
+.map-box{width:100%}
+.gmap{width:100%;height:280px;border:0;border-radius:24px;display:block;filter:saturate(.9)}
+.route-btn{display:block;width:100%;margin-top:16px;background:#fff;color:var(--btn);border:2px solid var(--btn);border-radius:999px;padding:15px 20px;font-family:'Zen Maru Gothic',sans-serif;font-weight:700;font-size:.95rem;letter-spacing:.06em;cursor:pointer;transition:background .2s,color .2s}
+.route-btn:hover{background:var(--btn);color:#fff}
+.route-btn:disabled{opacity:.6;cursor:wait}
+.route-note{font-size:.8rem;color:var(--gray);margin-top:10px;text-align:center;line-height:1.7}
+
+.route-result{margin-top:18px;background:var(--bg-sub);border-radius:20px;padding:24px 20px;text-align:center}
+.rr-main{margin:0;line-height:1.4}
+.rr-time{font-family:'Zen Maru Gothic',sans-serif;font-weight:700;font-size:clamp(1.7rem,6vw,2.2rem);color:var(--btn);display:block}
+.rr-unit{font-size:.8rem;color:var(--gray);display:block;margin-top:4px}
+.rr-sub{font-size:.9rem;color:var(--ink);margin:10px 0 14px}
+.rr-link{font-size:.88rem;color:var(--btn);font-weight:700;text-decoration:underline;text-underline-offset:4px}
+
+/* === faq === */
+.faq{background:#fff}
+.faq-list{max-width:760px;margin:0 auto}
+.faq-list details{border-bottom:1px solid var(--line)}
+.faq-list summary{list-style:none;cursor:pointer;padding:22px 40px 22px 4px;font-weight:700;font-size:1rem;color:var(--ink);position:relative;line-height:1.8}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary::before{content:"Q.";color:var(--btn);font-family:'Zen Maru Gothic',sans-serif;font-weight:700;margin-right:10px}
+.faq-list summary::after{content:"＋";position:absolute;right:8px;top:50%;transform:translateY(-50%);color:var(--btn);font-size:1.2rem;transition:transform .2s}
+.faq-list details[open] summary::after{content:"−"}
+.faq-list .faq-a{padding:0 4px 24px;color:var(--gray);font-size:.95rem;line-height:2}
+.faq-list .faq-a::before{content:"A.";color:var(--accent);font-family:'Zen Maru Gothic',sans-serif;font-weight:700;margin-right:10px}
+
+/* === hero slideshow === */
+.hero-slides{position:relative;height:min(72vh,560px);overflow:hidden;border-radius:0 0 44px 44px}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.8s ease;z-index:0}
+.hero-slide.is-active{opacity:1;z-index:1}
+.hero-slide .ph,.hero-slide img,.hero-slide video{width:100%;height:100%;object-fit:cover;border-radius:0;border:none}
+.hero-dots{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:2}
+.hero-dots span{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.55);box-shadow:0 0 4px rgba(0,0,0,.3);transition:background .3s}
+.hero-dots span.on{background:#fff}
+@media (prefers-reduced-motion:reduce){.hero-slide{transition:none}}
+
+/* === hero tag === */
+.hero-tag{position:absolute;left:50%;bottom:56px;transform:translateX(-50%);z-index:3;background:none;color:#fff;font-family:'Zen Maru Gothic',sans-serif;font-weight:700;font-size:clamp(1.25rem,4.2vw,2.1rem);letter-spacing:.08em;line-height:1.9;padding:0 20px;text-align:center;width:max-content;max-width:calc(100% - 32px);text-shadow:0 2px 14px rgba(0,0,0,.55),0 0 4px rgba(0,0,0,.4)}
+.hero-tag .tag-strong{display:block;font-size:1.15em}
+.hero-tag .tag-name{display:block;font-size:.6em;letter-spacing:.14em;margin-top:8px;opacity:.92}
+.hero-slides::after{content:"";position:absolute;inset:auto 0 0 0;height:55%;background:linear-gradient(to top,rgba(30,25,20,.62),rgba(30,25,20,0));z-index:2;pointer-events:none;border-radius:0 0 44px 44px}
+
+/* === gallery === */
+.gallery{background:#fff;overflow:hidden}
+.g-lead{text-align:center;color:var(--gray);margin:-28px auto 44px;font-size:.95rem;max-width:34em;padding:0 24px}
+.g-marquee{overflow:hidden;width:100%}
+.g-track{display:flex;gap:20px;width:max-content}
+.g-cell{margin:0;width:280px;flex-shrink:0}
+.g-cell .ph,.g-cell img{width:100%;height:200px;object-fit:cover;border-radius:18px;display:block}
+.g-cell .ph{height:200px;font-size:.75rem}
+.g-cell figcaption{text-align:center;margin-top:8px;font-size:.88rem;color:var(--ink);font-weight:500;letter-spacing:.06em}
+@keyframes scrollx-rev{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+@media (prefers-reduced-motion:reduce){.g-track{animation:none}.g-marquee{overflow-x:auto;-webkit-overflow-scrolling:touch}}
+
+/* === carousel manual control === */
+.car-shell{position:relative}
+.car-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.95);border:1px solid var(--line);color:var(--btn);font-size:1.6rem;line-height:1;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s;padding:0}
+.car-btn:hover{background:var(--btn);color:#fff;border-color:var(--btn)}
+.car-btn.prev{left:10px}
+.car-btn.next{right:10px}
+.marquee{overflow-x:auto;scrollbar-width:none;cursor:grab}
+.marquee::-webkit-scrollbar{display:none}
+.marquee.dragging{cursor:grabbing;user-select:none}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "name": "にこの家",
+  "alternateName": "Niko's House",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "大宮5523-9",
+    "addressLocality": "秩父市",
+    "addressRegion": "埼玉県",
+    "addressCountry": "JP",
+    "postalCode": "368-0023"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 35.9924,
+    "longitude": 139.0855
+  },
+  "url": "https://nicoshouse.airhost.co/ja",
+  "petsAllowed": true,
+  "amenityFeature": [
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "一棟貸切",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "頭数制限なし・ケージ不要",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "人工芝のプライベートガーデン",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "滑りにくい床材",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "セルフチェックイン",
+      "value": true
+    }
+  ],
+  "potentialAction": {
+    "@type": "ReserveAction",
+    "target": "https://nicoshouse.airhost.co/ja"
+  },
+  "description": "体重制限なし・犬種制限なし・ケージ不要。大型犬とのびのび過ごせる埼玉県秩父市の一棟貸しペット民泊。人工芝のプライベートガーデンと滑りにくい床材で、大きな家族も安心。",
+  "checkinTime": "15:00",
+  "checkoutTime": "10:00"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "体重制限は本当にないですか？超大型犬（40kg以上）でも泊まれますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "はい、宿泊可能です。体重・犬種による制限は一切設けていません。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ケージやサークルの持参は必要ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "当施設ではケージ・サークルのご用意がありません。滞在中の利用義務はありませんが、「ないと困るもの」はお持ちください。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ベッドやソファに犬が乗っても大丈夫ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "大丈夫です。ご家庭と同じように、一緒にくつろいでください。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "庭はどのくらいの広さですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "縦約8m×横約4mほどの広さです。広大なドッグランではありませんが、リードを外して外の空気を楽しむには十分なプライベート空間です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "近くに大型犬が思いきり遊べる場所はありますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "車圏内に、屋内外の広大なドッグランを備えた「わん's場」、ドッグランと犬用温泉のある「スパ・ドッグズラン秩父」があります。宿でゆっくり、遊びは近隣施設で、という使い分けがおすすめです。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "チェックイン・チェックアウトの時間を教えてください。",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "チェックインは15:00、チェックアウトは10:00です。セルフチェックイン方式なので、到着後すぐにご家族だけの時間をお過ごしいただけます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "人間だけの宿泊もできますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "可能です。ペット連れでない方もお気軽にご利用ください。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ペットが粗相をしてしまった場合はどうなりますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "清掃道具をご用意していますので、清掃にご協力をお願いします。ご不安な場合はマナーパンツ等の着用をおすすめします。著しい破損や特別な清掃が必要な場合は、別途費用を請求させていただく可能性があります。"
+      }
+    }
+  ]
+}
+</script>
+<link rel="canonical" href="https://nikonote04.github.io/nicoshouse/lp/lp1_large-dogs.html">
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#">にこの家</a>
+    <a class="nav-cta" href="https://nicoshouse.airhost.co/ja" target="_blank" rel="noopener">ご予約</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-slides">
+    <p class="hero-tag"><span class="tag-strong">大型犬も、制限なしで泊まれる。</span><span class="tag-name">ペットと泊まる一棟貸しの宿「にこの家」</span></p>
+    <div class="hero-slide is-active"><img fetchpriority="high" decoding="async" src="assets/img/09310e4523.jpg" alt="ベッドで撫でられてまどろむバーニーズ・マウンテン・ドッグ"></div>
+    <div class="hero-slide"><img loading="lazy" decoding="async" src="assets/img/fb580f825b.jpg" alt="ソファで安心して眠るゴールデンレトリバー"></div>
+    <div class="hero-slide"><img loading="lazy" decoding="async" src="assets/img/e87278c49c.jpg" alt="飼い主を見上げながら散歩するグレートピレニーズ"></div>
+    <div class="hero-dots"><span class="on"></span><span></span><span></span></div>
+  </div>
+  <div class="hero-copy">
+    <span class="welcome">＼ 大型犬、大歓迎！ ／</span>
+    <h1>どんなに大きな子も、<br class="sp"><span class="mk">大歓迎</span>。</h1>
+    <p>体重制限なし・犬種制限なし・ケージ不要　—　秩父の一棟貸しの宿</p>
+  </div>
+</div>
+
+<section class="concept">
+  <div class="wrap">
+    <div class="label"><span class="en">Concept</span><span class="ja">大きな家族に、大きなくつろぎを</span></div>
+    <p>「大型犬OK」の宿でも、体重制限や就寝時のケージ利用など、どこかに我慢がある。にこの家は、その我慢をなくすためにつくられた宿です。</p>
+    <p>一棟まるごと貸切だから、他のお客様への気兼ねは一切不要。リビングでも、寝室でも、ずっと一緒にお過ごしいただけます。</p>
+  </div>
+</section>
+
+<section class="empathy">
+  <div class="wrap">
+    <div class="label"><span class="en">Voice</span><span class="ja">大型犬の飼い主さん、こんな経験ありませんか</span></div>
+    <div class="quotes">
+      <div class="q">「ペット可」で検索して、備考欄の「10kgまで」に何度ため息をついたか分からない。</div>
+      <div class="q">電話で大型犬と伝えたら、少し間があって「申し訳ございません」と言われたことがある。</div>
+      <div class="q">やっと泊まれた宿でも、夜はケージ。ケージ越しにこちらを見ていたあの子の顔が、忘れられない。</div>
+    </div>
+    <p class="answer">にこの家は、違います。<br>どんなに大きな子でも、大歓迎。<br>あの子に我慢をさせない旅を、ここから。</p>
+  </div>
+</section>
+
+<section class="features">
+  <div class="wrap">
+    <div class="label"><span class="en">Features</span><span class="ja">にこの家の魅力</span></div>
+
+    <div class="feature">
+      <div class="f-img"><div class="ph">写真：大型犬がリビングでくつろぐ様子</div></div>
+      <div>
+        <p class="num">01</p>
+        <h3>体重・犬種の制限なし</h3>
+        <p>「〇kgまで」「小型犬のみ」という条件は、にこの家にはありません。超大型犬も、そのままの姿で歓迎します。ケージのご用意も不要です。</p>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="f-img"><img loading="lazy" decoding="async" class="f-photo" src="assets/img/2ae29bca89.jpg" alt="にこの家のプライベートガーデン（人工芝）"></div>
+      <div>
+        <p class="num">02</p>
+        <h3>熱くならない人工芝のプライベートガーデン</h3>
+        <p>お庭に採用したのは、天然素材の冷却充填剤を使ったハイテク芝「COOOL Turf」。一般的な人工芝は真夏に70℃を超えることもありますが、この芝は熱がこもりにくく、肉球への負担を抑えます。広大なドッグランではありませんが、リードを外してひなたぼっこをしたり、家族だけでのんびり過ごせるお庭です。</p>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="f-img"><video class="f-video" autoplay muted loop playsinline preload="auto" poster="assets/img/549f6003fb.webp" aria-label="滑りにくい床材の上を歩くようす"><source src="assets/video/floor.mp4" type="video/mp4"></video></div>
+      <div>
+        <p class="num">03</p>
+        <h3>滑りにくい床材で足腰にやさしく</h3>
+        <p>室内は滑りにくい床材を採用。体重のある大型犬の関節への負担を抑え、室内でも安心して歩き回れる住環境を整えました。</p>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="f-img"><img loading="lazy" decoding="async" class="f-photo" src="assets/img/a647b182a5.jpg" alt="セルフチェックイン用タブレットと看板犬の置物"></div>
+      <div>
+        <p class="num">04</p>
+        <h3>一棟貸切・セルフチェックイン</h3>
+        <p>チェックインは無人のセルフ方式。到着した瞬間から、家族と愛犬だけの時間が始まります。鳴き声や足音を気にする相手はいません。</p>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="f-img"><img loading="lazy" decoding="async" class="f-photo" src="assets/img/1078ecbc50.jpg" alt="イチョウ並木を散歩するゴールデンレトリバーと飼い主"></div>
+      <div>
+        <p class="num">05</p>
+        <h3>秩父の大自然が遊び場</h3>
+        <p>思いきり体を動かしたい子には、車ですぐの秩父の自然がフィールドです。川遊びも山歩きも気軽に楽しめて、ペットフレンドリーなお店が多い街歩きもおすすめです。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="gallery">
+  <div class="wrap">
+    <div class="label"><span class="en">Gallery</span><span class="ja">にこの家の中の様子はこちら</span></div>
+    <p class="g-lead">泊まる前に、すみずみまで。気になるところは全部ここで確認してください。</p>
+    <div class="car-shell"><button type="button" class="car-btn prev" aria-label="前の写真へ">&#8249;</button><div class="marquee g-marquee" data-dir="rev"><div class="m-track g-track"><figure class="g-cell"><img loading="lazy" decoding="async" src="assets/img/4d64854c24.jpg" alt="にこの家のリビング"></figure><figure class="g-cell"><img loading="lazy" decoding="async" src="assets/img/67fb1f93dc.jpg" alt="ダイニング"></figure><figure class="g-cell"><img loading="lazy" decoding="async" src="assets/img/4d7bd4d662.jpg" alt="キッチンとワークスペース"></figure><figure class="g-cell"><img loading="lazy" decoding="async" src="assets/img/9e42eaa33e.jpg" alt="寝室"></figure><figure class="g-cell"><img loading="lazy" decoding="async" src="assets/img/e2959d23e9.jpg" alt="ベッドでくつろぐ看板犬にこ"></figure><figure class="g-cell"><img loading="lazy" decoding="async" src="assets/img/12acd98177.jpg" alt="玄関とキャットステップ"></figure><figure class="g-cell"><img loading="lazy" decoding="async" src="assets/img/ab8cde8abf.jpg" alt="浴室"></figure><figure class="g-cell"><img loading="lazy" decoding="async" src="assets/img/f40579db17.jpg" alt="キャットタワースペース"></figure><figure class="g-cell"><img loading="lazy" decoding="async" src="assets/img/632a575eac.jpg" alt="館内のアート"></figure><figure class="g-cell"><img loading="lazy" decoding="async" src="assets/img/6b41906a39.jpg" alt="お出かけ準備のにこたち"></figure><figure class="g-cell"><img loading="lazy" decoding="async" src="assets/img/2d62a4e132.jpg" alt="夜のテラス"></figure><figure class="g-cell"><img loading="lazy" decoding="async" src="assets/img/f1a984bc05.jpg" alt="夜の人工芝ガーデン"></figure><figure class="g-cell"><img loading="lazy" decoding="async" src="assets/img/543625c61e.jpg" alt="ドッグランスペース"></figure><figure class="g-cell"><img loading="lazy" decoding="async" src="assets/img/14a5cda7a7.jpg" alt="にこの家の外観"></figure><figure class="g-cell"><img loading="lazy" decoding="async" src="assets/img/b2becbfb31.jpg" alt="人工芝の庭（昼）"></figure></div></div><button type="button" class="car-btn next" aria-label="次の写真へ">&#8250;</button></div>
+  </div>
+</section>
+
+<section class="chichibu">
+  <div class="label"><span class="en">Chichibu</span><span class="ja">秩父の、たのしみ</span></div>
+  <p class="chi-lead">四季折々の景色、歴史ある社寺、走るSL。秩父には、訪れる楽しみがたくさんあります。</p>
+  <div class="car-shell"><button type="button" class="car-btn prev" aria-label="前の写真へ">&#8249;</button><div class="marquee" data-dir="fwd">
+    <div class="m-track"><figure class="m-card"><img loading="lazy" decoding="async" class="m-photo" src="assets/img/c7bce7caa7.jpg" alt="長瀞の渓谷"><figcaption>長瀞の大自然</figcaption></figure><figure class="m-card"><img loading="lazy" decoding="async" class="m-photo" src="assets/img/707a1b0949.jpg" alt="羊山公園の芝桜と武甲山"><figcaption>羊山公園の芝桜</figcaption></figure><figure class="m-card"><img loading="lazy" decoding="async" class="m-photo" src="assets/img/a58d479f7e.jpg" alt="三峯神社の社殿"><figcaption>三峯神社</figcaption></figure><figure class="m-card"><img loading="lazy" decoding="async" class="m-photo" src="assets/img/b4b1ce1d20.jpg" alt="秩父ミューズパークのイチョウ並木"><figcaption>秩父ミューズパーク</figcaption></figure><figure class="m-card"><img loading="lazy" decoding="async" class="m-photo" src="assets/img/00b3e30c9c.jpg" alt="SLパレオエクスプレス C58 363"><figcaption>SLパレオエクスプレス</figcaption></figure><figure class="m-card"><img loading="lazy" decoding="async" class="m-photo" src="assets/img/5a90cd5a09.jpg" alt="秩父のシンボル 武甲山"><figcaption>壮大な武甲山</figcaption></figure></div>
+  </div><button type="button" class="car-btn next" aria-label="次の写真へ">&#8250;</button></div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="label"><span class="en">Policy</span><span class="ja">にこの家のきまりごと</span></div>
+    <div class="rules-grid">
+      <div class="rule"><p class="t">体重制限なし</p><p class="d">超大型犬も歓迎</p></div>
+      <div class="rule"><p class="t">犬種制限なし</p><p class="d">どんな子もそのまま</p></div>
+      <div class="rule"><p class="t">ケージ不要</p><p class="d">就寝も一緒にどうぞ</p></div>
+      <div class="rule"><p class="t">一棟貸切</p><p class="d">他のお客様なし</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="access">
+  <div class="wrap access-inner">
+    <div class="map-box">
+      <iframe class="gmap" src="https://maps.google.com/maps?q=%E5%9F%BC%E7%8E%89%E7%9C%8C%E7%A7%A9%E7%88%B6%E5%B8%82%E5%A4%A7%E5%AE%AE5523-9&z=15&output=embed&hl=ja" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="にこの家の地図" allowfullscreen></iframe>
+      <button type="button" class="route-btn" id="routeBtn">現在地からお宿までの所要時間を算出</button>
+      <div class="route-result" id="routeResult" hidden>
+        <p class="rr-main"><span class="rr-time" id="rrTime">--</span><span class="rr-unit">（車でのおおよその目安）</span></p>
+        <p class="rr-sub" id="rrDist"></p>
+        <a class="rr-link" id="rrLink" href="#" target="_blank" rel="noopener">Googleマップで詳しいルートを見る →</a>
+      </div>
+      <p class="route-note" id="routeNote">現在地の取得を許可すると、車でのおおよその所要時間を表示します。</p>
+    </div>
+    <div>
+      <div class="label" style="text-align:left;margin-bottom:24px"><span class="en">Access</span><span class="ja">アクセス</span></div>
+      <h3>埼玉県秩父市</h3>
+      <p>関越道・圏央道経由で都心から車で約90〜120分。大型犬とのドライブ旅にちょうどいい距離です。</p>
+      <p>所在地：埼玉県秩父市大宮5523-9<br>西武秩父駅からのアクセスも良好です。</p>
+    </div>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap">
+    <div class="label"><span class="en">FAQ</span><span class="ja">よくあるご質問</span></div>
+    <div class="faq-list"><details><summary>体重制限は本当にないですか？超大型犬（40kg以上）でも泊まれますか？</summary><p class="faq-a">はい、宿泊可能です。体重・犬種による制限は一切設けていません。</p></details><details><summary>ケージやサークルの持参は必要ですか？</summary><p class="faq-a">当施設ではケージ・サークルのご用意がありません。滞在中の利用義務はありませんが、「ないと困るもの」はお持ちください。</p></details><details><summary>ベッドやソファに犬が乗っても大丈夫ですか？</summary><p class="faq-a">大丈夫です。ご家庭と同じように、一緒にくつろいでください。</p></details><details><summary>庭はどのくらいの広さですか？</summary><p class="faq-a">縦約8m×横約4mほどの広さです。広大なドッグランではありませんが、リードを外して外の空気を楽しむには十分なプライベート空間です。</p></details><details><summary>近くに大型犬が思いきり遊べる場所はありますか？</summary><p class="faq-a">車圏内に、屋内外の広大なドッグランを備えた「わん&#x27;s場」、ドッグランと犬用温泉のある「スパ・ドッグズラン秩父」があります。宿でゆっくり、遊びは近隣施設で、という使い分けがおすすめです。</p></details><details><summary>チェックイン・チェックアウトの時間を教えてください。</summary><p class="faq-a">チェックインは15:00、チェックアウトは10:00です。セルフチェックイン方式なので、到着後すぐにご家族だけの時間をお過ごしいただけます。</p></details><details><summary>人間だけの宿泊もできますか？</summary><p class="faq-a">可能です。ペット連れでない方もお気軽にご利用ください。</p></details><details><summary>ペットが粗相をしてしまった場合はどうなりますか？</summary><p class="faq-a">清掃道具をご用意していますので、清掃にご協力をお願いします。ご不安な場合はマナーパンツ等の着用をおすすめします。著しい破損や特別な清掃が必要な場合は、別途費用を請求させていただく可能性があります。</p></details></div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>大型犬、大歓迎。<br>次の週末は、あの子と一緒に秩父へ。</h2>
+    <a class="btn" href="https://nicoshouse.airhost.co/ja" target="_blank" rel="noopener">空室を確認する</a>
+    <span class="btn-note">公式予約サイトへ移動します</span>
+  </div>
+</section>
+
+<footer>にこの家｜埼玉県秩父市</footer>
+
+<script>
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target);}});
+  },{threshold:.12});
+  document.querySelectorAll('.feature,.q,.label,.answer,.rule,.concept p').forEach(function(el){
+    el.classList.add('fadein');io.observe(el);
+  });
+})();
+</script>
+<script>
+(function(){
+  var btn=document.getElementById('routeBtn'), note=document.getElementById('routeNote'),
+      box=document.getElementById('routeResult'), tEl=document.getElementById('rrTime'),
+      dEl=document.getElementById('rrDist'), link=document.getElementById('rrLink');
+  if(!btn) return;
+  var DLAT=35.992400, DLNG=139.085500, ADDR=encodeURIComponent('埼玉県秩父市大宮5523-9');
+
+  function hav(a,b,c,d){var R=6371,r=Math.PI/180,x=(c-a)*r,y=(d-b)*r,
+    h=Math.sin(x/2)*Math.sin(x/2)+Math.cos(a*r)*Math.cos(c*r)*Math.sin(y/2)*Math.sin(y/2);
+    return R*2*Math.atan2(Math.sqrt(h),Math.sqrt(1-h));}
+  function fmt(m){m=Math.round(m);if(m<60)return m+'分';return Math.floor(m/60)+'時間'+(m%60?(m%60)+'分':'');}
+
+  function show(min,km,lat,lng,est){
+    tEl.textContent='約'+fmt(min);
+    dEl.textContent='距離：約'+km.toFixed(0)+'km';
+    link.href='https://www.google.com/maps/dir/?api=1&origin='+lat+','+lng+'&destination='+ADDR+'&travelmode=driving';
+    box.hidden=false;
+    note.textContent=est?'※直線距離からの概算です。実際の所要時間は交通状況により変わります。':'※交通状況により変わります。詳細はGoogleマップでご確認ください。';
+    btn.disabled=false; btn.textContent='もう一度計算する';
+  }
+
+  btn.addEventListener('click',function(){
+    if(!navigator.geolocation){note.textContent='この端末では現在地を取得できません。';return;}
+    btn.disabled=true; btn.textContent='計算しています…';
+    navigator.geolocation.getCurrentPosition(function(p){
+      var la=p.coords.latitude, ln=p.coords.longitude;
+      fetch('https://router.project-osrm.org/route/v1/driving/'+ln+','+la+';'+DLNG+','+DLAT+'?overview=false')
+        .then(function(r){return r.json();})
+        .then(function(j){
+          if(j.routes&&j.routes[0]){show(j.routes[0].duration/60,j.routes[0].distance/1000,la,ln,false);}
+          else{throw 0;}
+        })
+        .catch(function(){
+          var km=hav(la,ln,DLAT,DLNG)*1.3;
+          show(km/45*60,km,la,ln,true);
+        });
+    },function(){
+      btn.disabled=false; btn.textContent='現在地からお宿までの所要時間を算出';
+      note.textContent='現在地を取得できませんでした。位置情報の許可設定をご確認ください。';
+    },{enableHighAccuracy:false,timeout:8000,maximumAge:300000});
+  });
+})();
+</script>
+<script>
+(function(){
+  var slides=document.querySelectorAll('.hero-slide');
+  var dots=document.querySelectorAll('.hero-dots span');
+  if(slides.length<2) return;
+  var i=0, INTERVAL=5000;
+  setInterval(function(){
+    slides[i].classList.remove('is-active'); if(dots[i]) dots[i].classList.remove('on');
+    i=(i+1)%slides.length;
+    slides[i].classList.add('is-active'); if(dots[i]) dots[i].classList.add('on');
+  }, INTERVAL);
+})();
+</script>
+<script>
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.car-shell').forEach(function(shell){
+    var mq=shell.querySelector('.marquee');
+    var track=mq.firstElementChild;track.innerHTML+=track.innerHTML;
+    var dir=mq.getAttribute('data-dir')==='rev'?-1:1;
+    var speed=reduce?0:0.55;
+    var paused=false, idle;
+
+    function half(){return track.scrollWidth/2;}
+    if(dir<0) mq.scrollLeft=half();
+
+    function wrap(){
+      var h=half();
+      if(mq.scrollLeft>=h) mq.scrollLeft-=h;
+      else if(mq.scrollLeft<=0) mq.scrollLeft+=h;
+    }
+    mq.addEventListener('scroll',wrap,{passive:true});
+
+    (function loop(){
+      if(!paused&&speed) {mq.scrollLeft+=speed*dir;}
+      requestAnimationFrame(loop);
+    })();
+
+    function pause(ms){paused=true;clearTimeout(idle);idle=setTimeout(function(){paused=false;},ms||3500);}
+    ['touchstart','wheel','pointerdown'].forEach(function(ev){mq.addEventListener(ev,function(){pause();},{passive:true});});
+
+    shell.querySelectorAll('.car-btn').forEach(function(b){
+      b.addEventListener('click',function(){
+        pause(5000);
+        var card=track.querySelector('figure');
+        var step=card?card.getBoundingClientRect().width+20:280;
+        mq.scrollBy({left:(b.classList.contains('next')?1:-1)*step,behavior:'smooth'});
+      });
+    });
+
+    var down=false,sx=0,sl=0;
+    mq.addEventListener('mousedown',function(e){down=true;sx=e.pageX;sl=mq.scrollLeft;mq.classList.add('dragging');e.preventDefault();});
+    window.addEventListener('mousemove',function(e){if(down){mq.scrollLeft=sl-(e.pageX-sx);}});
+    window.addEventListener('mouseup',function(){down=false;mq.classList.remove('dragging');});
+  });
+})();
+</script>
+</body>
+</html>
