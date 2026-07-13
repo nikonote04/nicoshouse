@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://nikonote04.github.io/nicoshouse/sitemap.xml
