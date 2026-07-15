@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>にこの家 ハウスガイド & デジタルコンパニオン</title>
+  
+  <!-- Google Fonts: 高級感あふれる和風明朝体と視認性の高いゴシック体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Google Material Symbols Outlined (Web版デジタルコンパニオン用の最小限のアイコンフォント) -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+
+  <!-- Tailwind CSS FOR Digital Screen Layouts -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#3a2e1e',
+              gold: '#8c7a5a',
+              sand: '#b8b0a0',
+              accent: '#a08060',
+              cream: '#fdfaf3',
+              lightgold: '#c8b890',
+            }
+          },
+          fontFamily: {
+            serif: ['Shippori Mincho', 'serif'],
+            sans: ['Noto Sans JP', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    /* アイコンの基本スタイル調整（Web版のみで使用） */
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+
+    .icon-container {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .transition-all-300 {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1ede4;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c8b890;
+      border-radius: 3px;
+    }
+
+    /* 印刷シミュレーション用スタイル（ブラウザ画面表示用） */
+    .print-preview-container {
+      background: #b8b0a0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 20px;
+    }
+
+    /* A4縦サイズをブラウザ上で再現するための枠 */
+    .a4-page {
+      width: 210mm;
+      height: 297mm;
+      background: #ffffff;
+      padding: 13mm 15mm 12mm;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(58, 46, 30, 0.25);
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    /* 原稿用紙のような繊細な背景線 */
+    .a4-page::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 30px, rgba(160, 140, 100, 0.035) 30px, rgba(160, 140, 100, 0.035) 31px);
+      pointer-events: none;
+    }
+
+    /* 印刷時の用紙割り当て */
+    @media print {
+      body {
+        background: #ffffff !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-preview-container {
+        padding: 0 !important;
+        background: transparent !important;
+        display: block !important;
+      }
+      .a4-page {
+        box-shadow: none !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        margin: 0 auto !important;
+        page-break-after: always;
+      }
+    }
+
+    .checkbox-pop:active {
+      transform: scale(0.92);
+    }
+  </style>
+</head>
+<body class="bg-[#faf8f5] font-sans text-brand-dark min-h-screen flex flex-col antialiased">
+
+  <!-- 上部ナビゲーション（デジタルモード時のみ表示） -->
+  <header class="no-print bg-white/95 backdrop-blur-md border-b border-brand-lightgold/40 sticky top-0 z-50 transition-all-300">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <!-- Web版左上：ロゴ置き換えスペース（imagesフォルダから読み込み、ない場合は家アイコンにフォールバックします） -->
+        <div class="w-10 h-10 rounded-full bg-brand-cream border border-brand-lightgold flex items-center justify-center text-brand-accent overflow-hidden">
+          <img id="web-logo" src="./images/logo.svg" alt="ロゴ" class="w-full h-full object-contain p-1" onerror="this.style.display='none'; document.getElementById('web-logo-fallback').classList.remove('hidden');">
+          <span id="web-logo-fallback" class="material-symbols-outlined font-normal text-xl hidden">home</span>
+        </div>
+        <div>
+          <h1 class="font-serif font-bold text-lg leading-tight tracking-wider">にこの家</h1>
+          <p class="text-[10px] text-brand-gold tracking-widest uppercase">Digital Companion</p>
+        </div>
+      </div>
+
+      <!-- ビューモード切り替えスイッチ -->
+      <div class="flex items-center gap-1.5 bg-brand-cream/80 border border-brand-lightgold/50 p-1 rounded-full text-xs">
+        <button id="btn-mode-digital" onclick="switchView('digital')" class="px-3.5 py-1.5 rounded-full font-medium transition-all duration-300 bg-brand-dark text-white shadow-sm flex items-center gap-1.5">
+          <span class="icon-container"><span class="material-symbols-outlined text-sm">phone_iphone</span></span>スマホ画面
+        </button>
+        <button id="btn-mode-print" onclick="switchView('print')" class="px-3.5 py-1.5 rounded-full font-medium text-brand-gold hover:text-brand-dark transition-all duration-300 flex items-center gap-1.5">
+          <span class="icon-container"><span class="material-symbols-outlined text-sm">print</span></span>紙のしおり(A4)
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    <!-- ==================== 1. スマホ用デジタルコンパニオン画面 ==================== -->
+    <div id="view-digital" class="no-print max-w-2xl mx-auto px-4 py-6 space-y-6">
+      
+      <!-- ウェルカムカード -->
+      <div class="bg-gradient-to-br from-brand-cream to-[#f7f2e8] border border-brand-lightgold/60 rounded-2xl p-6 shadow-sm relative overflow-hidden">
+        <div class="flex items-start justify-between">
+          <div class="space-y-2">
+            <span class="inline-block bg-brand-gold/10 text-brand-accent text-xs px-3 py-1 rounded-full font-medium">ご滞在中</span>
+            <h2 class="font-serif font-bold text-2xl text-brand-dark leading-tight">にこの家へ、ようこそ。</h2>
+            <p class="text-xs text-brand-gold/90 font-serif tracking-wider">Welcome to Nico's House in Chichibu</p>
+          </div>
+          <div class="text-brand-accent opacity-80">
+            <span class="icon-container"><span class="material-symbols-outlined text-4xl">pets</span></span>
+          </div>
+        </div>
+
+        <div class="mt-4 pt-4 border-t border-brand-lightgold/30 text-sm leading-relaxed text-[#5a4e38]">
+          <p>東京から車で約90分、秩父市にあるペットと泊まれる一棟貸し宿「にこの家」。ケージは不要で、お布団（ロータイプマットレス）への立ち入り制限や添い寝の制限も一切ありません。犬（小型・中型・大型）や猫をはじめ、うさぎ・フェレットなど、多種多様なペット家族を当たり前の「家族」としてあたたかく歓迎いたします。</p>
+        </div>
+      </div>
+
+      <!-- クイックアクセスカード（Wi-Fi & カウントダウン） -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+        <!-- Wi-Fi一発コピー -->
+        <div class="bg-white border border-brand-lightgold/50 rounded-2xl p-5 shadow-sm space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="p-2 rounded-xl bg-amber-50 text-brand-accent icon-container"><span class="material-symbols-outlined">wifi</span></span>
+              <h3 class="font-bold text-sm">高速Wi-Fi接続</h3>
+            </div>
+            <span class="text-[10px] text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full font-medium">無料提供</span>
+          </div>
+
+          <div class="space-y-2.5 text-xs">
+            <div class="flex items-center justify-between p-2.5 bg-brand-cream/60 rounded-xl border border-brand-lightgold/20">
+              <div>
+                <span class="text-slate-400 block text-[9px] uppercase tracking-wider font-semibold">SSID</span>
+                <span id="wifi-ssid" class="font-mono font-medium text-brand-dark">niconoie-2026</span>
+              </div>
+              <button onclick="copyText('wifi-ssid', 'SSIDをコピーしました！')" class="px-3 py-1 bg-brand-dark hover:bg-brand-accent text-white text-[11px] rounded-lg transition-colors duration-200">コピー</button>
+            </div>
+            <div class="flex items-center justify-between p-2.5 bg-brand-cream/60 rounded-xl border border-brand-lightgold/20">
+              <div>
+                <span class="text-slate-400 block text-[9px] uppercase tracking-wider font-semibold">PASSWORD</span>
+                <span id="wifi-pass" class="font-mono font-medium text-brand-dark">livewithpets</span>
+              </div>
+              <button onclick="copyText('wifi-pass', 'パスワードをコピーしました！')" class="px-3 py-1 bg-brand-dark hover:bg-brand-accent text-white text-[11px] rounded-lg transition-colors duration-200">コピー</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- チェックアウトカウントダウン -->
+        <div class="bg-white border border-brand-lightgold/50 rounded-2xl p-5 shadow-sm flex flex-col justify-between space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="p-2 rounded-xl bg-amber-50 text-brand-accent icon-container"><span class="material-symbols-outlined">schedule</span></span>
+              <h3 class="font-bold text-sm">チェックアウト時刻</h3>
+            </div>
+            <span class="text-[10px] text-brand-accent bg-brand-cream border border-brand-lightgold/30 px-2 py-0.5 rounded-full font-medium">AM 10:00 まで</span>
+          </div>
+
+          <div class="text-center py-2">
+            <div class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">チェックアウトまで残り</div>
+            <div id="checkout-timer" class="text-2xl font-bold font-serif text-brand-dark mt-1">--時間--分</div>
+          </div>
+
+          <button onclick="scrollToElement('section-checkin-tab')" class="w-full text-center text-xs py-2 border border-brand-lightgold/50 hover:border-brand-accent text-brand-gold hover:text-brand-accent rounded-xl transition-all duration-300">
+            手続き方法を確認する
+          </button>
+        </div>
+
+      </div>
+
+      <!-- お部屋ごとのこだわり床材紹介 -->
+      <div class="bg-white border border-brand-lightgold/50 rounded-2xl p-5 shadow-sm space-y-4">
+        <div class="flex items-center gap-2">
+          <span class="p-2 rounded-xl bg-amber-50 text-brand-accent icon-container"><span class="material-symbols-outlined">layers</span></span>
+          <div>
+            <h3 class="font-bold text-sm">住まいラボ体験ガイド</h3>
+            <p class="text-[10px] text-slate-400">ペットと暮らす理想の住まいのアイデアをご紹介</p>
+          </div>
+        </div>
+
+        <!-- インタラクティブマップ/切り替えボタン -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <button onclick="selectFloor('living')" id="btn-floor-living" class="floor-btn p-3 rounded-xl border text-left transition-all duration-300 bg-brand-cream border-brand-accent text-brand-dark">
+            <div class="text-[10px] font-semibold text-brand-accent uppercase">Living</div>
+            <div class="text-xs font-bold">リビング</div>
+          </button>
+          <button onclick="selectFloor('bedroom')" id="btn-floor-bedroom" class="floor-btn p-3 rounded-xl border text-left transition-all duration-300 border-brand-lightgold/30 bg-slate-50 text-slate-600">
+            <div class="text-[10px] font-semibold text-slate-400 uppercase">Bedroom</div>
+            <div class="text-xs font-bold">寝室</div>
+          </button>
+          <button onclick="selectFloor('kitchen')" id="btn-floor-kitchen" class="floor-btn p-3 rounded-xl border text-left transition-all duration-300 border-brand-lightgold/30 bg-slate-50 text-slate-600">
+            <div class="text-[10px] font-semibold text-slate-400 uppercase">Kitchen</div>
+            <div class="text-xs font-bold">フルキッチン</div>
+          </button>
+          <button onclick="selectFloor('garden')" id="btn-floor-garden" class="floor-btn p-3 rounded-xl border text-left transition-all duration-300 border-brand-lightgold/30 bg-slate-50 text-slate-600">
+            <div class="text-[10px] font-semibold text-slate-400 uppercase">Dog Run</div>
+            <div class="text-xs font-bold">お庭</div>
+          </button>
+        </div>
+
+        <!-- 床材詳細ディスプレイ -->
+        <div id="floor-display" class="bg-brand-cream/40 border border-brand-lightgold/30 rounded-xl p-4 text-xs transition-all duration-300 space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-brand-accent"></span>
+            <span id="floor-material-name" class="font-bold text-brand-dark">足腰に優しい床材・フローリング</span>
+          </div>
+          <p id="floor-desc" class="text-slate-600 leading-relaxed">滑り防止の特殊コーティングを施したフローリングや、適度な起毛が足をサポートする素材を採用。足腰が弱くなったシニア犬や、室内を元気に走り回る猫ちゃんの怪我を防ぎ、関節への負担を和らげる設計をご体感ください。</p>
+        </div>
+      </div>
+
+      <!-- ガイド各セクション (アコーディオン) -->
+      <div class="space-y-3">
+        
+        <!-- セクション1: チェックイン・アウト -->
+        <div id="section-checkin-tab" class="bg-white border border-brand-lightgold/50 rounded-2xl overflow-hidden shadow-sm">
+          <button onclick="toggleAccordion('acc-checkin')" class="w-full flex items-center justify-between p-5 text-left focus:outline-none">
+            <div class="flex items-center gap-3">
+              <span class="p-2 rounded-xl bg-brand-cream text-brand-accent icon-container"><span class="material-symbols-outlined">key</span></span>
+              <div>
+                <h4 class="font-bold text-sm">1. チェックイン & チェックアウト</h4>
+                <p class="text-[10px] text-slate-400">玄関備え付けタブレット・スマートロック開錠手順</p>
+              </div>
+            </div>
+            <span id="arrow-acc-checkin" class="text-xs text-brand-gold font-serif transition-all duration-300">▼</span>
+          </button>
+          
+          <div id="acc-checkin" class="border-t border-slate-100 hidden p-5 bg-brand-cream/20 space-y-4 text-xs leading-relaxed text-[#5a4e38]">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="bg-white p-3.5 rounded-xl border border-brand-lightgold/30">
+                <h5 class="font-bold text-brand-accent mb-2 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-brand-accent"></span>チェックイン（15:00〜）
+                </h5>
+                <ol class="space-y-2 list-decimal list-inside pl-1 text-slate-600">
+                  <li>玄関備え付けのタブレットで「チェックイン」ボタンをタップ。</li>
+                  <li>事前メール内の「事前チェックインURL」からQRコードを表示し、タブレットカメラにかざします。</li>
+                  <li>手続き完了後、事前にメールにて通知されたスマートロックの暗証番号を入力して開錠してください。</li>
+                </ol>
+              </div>
+              <div class="bg-white p-3.5 rounded-xl border border-brand-lightgold/30">
+                <h5 class="font-bold text-brand-accent mb-2 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-brand-accent"></span>チェックアウト（〜10:00）
+                </h5>
+                <ol class="space-y-2 list-decimal list-inside pl-1 text-slate-600">
+                  <li>タブレットの「チェックアウト」ボタンをタップ。</li>
+                  <li>チェックイン時と同様にQRコードを読み込ませれば、手続きは完了です。</li>
+                </ol>
+              </div>
+            </div>
+            <div class="bg-amber-50/70 border-l-2 border-brand-gold p-3 rounded-r-lg text-[11px] text-[#7a6a4a]">
+              ※ 原則として時間の自動延長は承っておりません。余裕を持ったご出発の手続きと、お忘れ物の確認をお願いいたします。
+            </div>
+          </div>
+        </div>
+
+        <!-- セクション2: ペットとの過ごし方 -->
+        <div class="bg-white border border-brand-lightgold/50 rounded-2xl overflow-hidden shadow-sm">
+          <button onclick="toggleAccordion('acc-pet')" class="w-full flex items-center justify-between p-5 text-left focus:outline-none">
+            <div class="flex items-center gap-3">
+              <span class="p-2 rounded-xl bg-brand-cream text-brand-accent icon-container"><span class="material-symbols-outlined">pets</span></span>
+              <div>
+                <h4 class="font-bold text-sm">2. ペットとの過ごし方マナー</h4>
+                <p class="text-[10px] text-slate-400">マットレス添い寝制限なし・プライベートドッグラン</p>
+              </div>
+            </div>
+            <span id="arrow-acc-pet" class="text-xs text-brand-gold font-serif transition-all duration-300">▼</span>
+          </button>
+          
+          <div id="acc-pet" class="border-t border-slate-100 hidden p-5 bg-brand-cream/20 space-y-4 text-xs leading-relaxed text-[#5a4e38]">
+            <div class="space-y-3">
+              <div>
+                <span class="font-bold text-brand-dark block mb-1">■ 室内マナー & 添い寝</span>
+                <p class="text-slate-600 pl-3 border-l border-brand-lightgold/50 mb-2">ソファやお布団の制限はありません。ロータイプマットレスへの立ち入り制限も一切ないため、おうちと同じようにみんなで川の字になって添い寝をしていただけます。ケージに入れる強制もありません。粗相がご心配な場合は、お持ち込みのマナーパンツのご着用、または備え付けのお手入れ道具をご利用ください。</p>
+                <div class="bg-rose-50/80 border border-rose-200/60 p-2.5 rounded-lg text-[11px] text-rose-950 flex items-start gap-1.5 ml-3">
+                  <span class="material-symbols-outlined text-rose-700 text-sm mt-0.5">warning</span>
+                  <div>
+                    <span class="font-bold text-rose-900">排泄物は絶対にトイレへ流さないでください</span><br>
+                    配管詰まりや浄化槽保護のため、ペットの排泄物（うんち・シーツ等）は絶対に室内の水洗トイレに流さず、袋に密閉してお庭の専用ゴミ箱へ破棄していただくよう徹底をお願いいたします。
+                  </div>
+                </div>
+              </div>
+              <div>
+                <span class="font-bold text-brand-dark block mb-1">■ 遮熱人工芝ドッグラン（お庭）</span>
+                <p class="text-slate-600 pl-3 border-l border-brand-lightgold/50">ウッドフェンスに囲まれた完全プライベートなドッグランです。夏の強い太陽光でも熱を吸収しにくく、肉球が熱くなりにくい特殊な遮熱人工芝を敷いています。ノーリードで安心安全に走らせることができます。おしっこはたっぷりの水で流し、うんちは袋に入れ、お庭の専用ゴミ箱に破棄してください。</p>
+                <div class="bg-[#fcf9f2] border border-brand-lightgold/40 p-2.5 rounded-lg text-[11px] text-[#7a6a4a] flex items-start gap-1.5 ml-3 mt-1.5">
+                  <span class="material-symbols-outlined text-brand-accent text-sm mt-0.5">volume_mute</span>
+                  <div>
+                    <span class="font-bold text-brand-dark">夜間・早朝の騒音（吠え声など）へのご配慮</span><br>
+                    <span class="font-semibold text-brand-accent">20:00〜翌朝8:00</span>は、近隣への騒音配慮のため、ドッグランでの長時間のプレイスペースとしての利用や激しい吠え声等、お静かに過ごしていただけますようご理解とご協力をお願いいたします。
+                  </div>
+                </div>
+              </div>
+              <div>
+                <span class="font-bold text-brand-dark block mb-1">■ 足洗い場</span>
+                <p class="text-slate-600 pl-3 border-l border-brand-lightgold/50">玄関のすぐ横とお庭（ドッグラン）の2箇所にあります。タオルも用意していますので、お気軽にご利用ください。</p>
+              </div>
+              <div>
+                <span class="font-bold text-brand-dark block mb-1">■ 各種証明書の提示について</span>
+                <p class="text-slate-600 pl-3 border-l border-brand-lightgold/50">「にこの家」での宿泊時に、狂犬病やワクチンの証明書を提示する必要はありません。ただし、周辺の観光スポットや飲食店など、秩父エリアの他施設では提示を求められる場合があるため、原本またはコピー（画像でも可）をご持参いただくことをおすすめします。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- セクション3: 館内ルール & ゴミ分別 -->
+        <div class="bg-white border border-brand-lightgold/50 rounded-2xl overflow-hidden shadow-sm">
+          <button onclick="toggleAccordion('acc-rules')" class="w-full flex items-center justify-between p-5 text-left focus:outline-none">
+            <div class="flex items-center gap-3">
+              <span class="p-2 rounded-xl bg-brand-cream text-brand-accent icon-container"><span class="material-symbols-outlined">home_work</span></span>
+              <div>
+                <h4 class="font-bold text-sm">3. 設備・館内ルール & ゴミ分別</h4>
+                <p class="text-[10px] text-slate-400">キッチン・完全禁煙ポリシー・ゴミ処理について</p>
+              </div>
+            </div>
+            <span id="arrow-acc-rules" class="text-xs text-brand-gold font-serif transition-all duration-300">▼</span>
+          </button>
+          
+          <div id="acc-rules" class="border-t border-slate-100 hidden p-5 bg-brand-cream/20 space-y-4 text-xs leading-relaxed text-[#5a4e38]">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <h5 class="font-bold text-brand-dark mb-1">🍳 フルキッチン・家電</h5>
+                <p class="text-slate-600">3口ガスコンロ、冷蔵庫、電子レンジ、炊飯器、オーブントースター、電気ケトル、食器類一式を完備。ペット用の食事づくりやご家族での料理を自由にお楽しみいただけます。調味料のみご用意がありませんのでお持ち込みください。</p>
+              </div>
+              <div>
+                <h5 class="font-bold text-brand-dark mb-1 flex items-center gap-1">
+                  <span class="icon-container text-rose-600 text-sm"><span class="material-symbols-outlined">smoke_free</span></span>施設内完全禁煙
+                </h5>
+                <p class="text-slate-600">お部屋・お庭（ウッドデッキ等を含む敷地内すべて）において、加熱式タバコ・電子タバコを含め<span class="font-bold text-rose-700 underline">完全禁煙</span>です。ペットの健康被害防止と、木造建築物の防火のためご協力ください。</p>
+              </div>
+              <div class="sm:col-span-2">
+                <h5 class="font-bold text-brand-dark mb-1">🚮 ゴミの分別方法</h5>
+                <ul class="space-y-1.5 text-slate-600">
+                  <li class="flex items-center gap-1.5"><span class="px-1.5 py-0.5 bg-red-100 text-red-700 rounded text-[10px] font-bold">燃えるゴミ</span>生ゴミ、プラスチック、ペットボトル</li>
+                  <li class="flex items-center gap-1.5"><span class="px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded text-[10px] font-bold">資源ゴミ</span>ビン・カン類（専用ゴミ箱へ）</li>
+                  <li class="flex items-center gap-1.5"><span class="px-1.5 py-0.5 bg-rose-100 text-rose-700 rounded text-[10px] font-bold">排泄物（犬・猫等）</span>うんちはトイレに流さず袋に入れてお庭の専用ゴミ箱（ペットうんち用）へ</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="bg-rose-50/70 border-l-2 border-rose-500 p-3 rounded-r-lg text-[11px] text-[#7a4e4a] space-y-1.5">
+              <p>※ お風呂は人間専用となります。ペット用のバスタブやドライヤーのご用意はありません。また、火の扱いには十分にご注意ください。</p>
+              <p class="font-medium text-rose-950">
+                <span class="font-bold text-rose-900 block mb-0.5">【汚損・破損についてのご案内】</span>
+                ペットとのびのび過ごせる宿ですが、故意による汚損・破損、または常識の範囲を越える極端な汚損（お布団への粗相を放置したことによる浸透や、壁紙・柱等への激しい引っ掻き傷など）につきましては、後日、実費相当のプロ清掃費用や施設修繕費をご請求させていただく場合がございます。どうぞ我が家のように、大切にお使いいただけますようお願い申し上げます。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- セクション4: 完備アメニティ一覧 -->
+        <div class="bg-white border border-brand-lightgold/50 rounded-2xl overflow-hidden shadow-sm">
+          <button onclick="toggleAccordion('acc-amenity')" class="w-full flex items-center justify-between p-5 text-left focus:outline-none">
+            <div class="flex items-center gap-3">
+              <span class="p-2 rounded-xl bg-brand-cream text-brand-accent icon-container"><span class="material-symbols-outlined">dry_cleaning</span></span>
+              <div>
+                <h4 class="font-bold text-sm">4. 設備・アメニティ一覧</h4>
+                <p class="text-[10px] text-slate-400">ワンちゃん＆猫ちゃん＆人間用アメニティ詳細</p>
+              </div>
+            </div>
+            <span id="arrow-acc-amenity" class="text-xs text-brand-gold font-serif transition-all duration-300">▼</span>
+          </button>
+          
+          <div id="acc-amenity" class="border-t border-slate-100 hidden p-5 bg-brand-cream/20 space-y-4 text-xs text-[#5a4e38]">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div class="space-y-2 bg-white p-3 rounded-xl border border-brand-lightgold/20">
+                <span class="font-bold text-brand-accent block border-b border-brand-lightgold/20 pb-1">🐶 犬用アメニティ</span>
+                <ul class="space-y-1 list-disc list-inside text-slate-600 text-[11px]">
+                  <li>レギュラーサイズペットシーツ</li>
+                  <li>消臭除菌スプレー</li>
+                  <li>フード・お水用ステンレスボウル</li>
+                  <li>ウエットティッシュ</li>
+                  <li>足拭きタオル</li>
+                  <li>粘着ローラー（コロコロ）</li>
+                </ul>
+              </div>
+              <div class="space-y-2 bg-white p-3 rounded-xl border border-brand-lightgold/20">
+                <span class="font-bold text-brand-accent block border-b border-brand-lightgold/20 pb-1">🐱 猫・小動物アメニティ</span>
+                <ul class="space-y-1 list-disc list-inside text-slate-600 text-[11px]">
+                  <li>押し入れ内蔵DIYキャットタワー＆隠れ家</li>
+                  <li>フード・お水用ボウル</li>
+                  <li>押入れ下に折り畳み中型ケージ完備</li>
+                </ul>
+              </div>
+              <div class="space-y-2 bg-white p-3 rounded-xl border border-brand-lightgold/20">
+                <span class="font-bold text-brand-accent block border-b border-brand-lightgold/20 pb-1">🧍 人間用設備・アメニティ</span>
+                <ul class="space-y-1 list-disc list-inside text-slate-600 text-[11px]">
+                  <li>シャンプー、コンディショナー、ボディソープ</li>
+                  <li>バスタオル、フェイスタオル、歯ブラシ</li>
+                  <li>サロニア製ヘアドライヤー</li>
+                  <li>洗濯機（洗剤あり。中長期滞在に便利）</li>
+                  <li>無料高速Wi-Fi完備</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 出発前お片付けチェックリスト (保存可能) -->
+      <div class="bg-white border border-brand-lightgold/50 rounded-2xl p-5 shadow-sm space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="p-2 rounded-xl bg-amber-50 text-brand-accent icon-container"><span class="material-symbols-outlined">fact_check</span></span>
+            <div>
+              <h3 class="font-bold text-sm">出発前チェックリスト</h3>
+              <p class="text-[10px] text-slate-400">お忘れ物防止と戸締りの確認にご協力ください</p>
+            </div>
+          </div>
+          <span id="checklist-progress" class="text-xs font-semibold text-brand-accent bg-brand-cream px-2.5 py-1 rounded-full">0/4 完了</span>
+        </div>
+
+        <!-- チェックアイテム群 -->
+        <div class="space-y-2 text-xs">
+          <label onclick="updateChecklist()" class="flex items-center justify-between p-3 bg-slate-50 hover:bg-brand-cream/40 rounded-xl cursor-pointer transition-colors duration-200 border border-slate-100">
+            <span class="font-medium text-[#5a4e38]">エアコン・暖房の電源をOFFにしましたか？</span>
+            <input type="checkbox" id="check-ac" class="checkbox-pop accent-brand-accent h-4.5 w-4.5 rounded text-white cursor-pointer focus:ring-0">
+          </label>
+          <label onclick="updateChecklist()" class="flex items-center justify-between p-3 bg-slate-50 hover:bg-brand-cream/40 rounded-xl cursor-pointer transition-colors duration-200 border border-slate-100">
+            <span class="font-medium text-[#5a4e38]">ゴミを分別し、ペット排泄物は流さずゴミ箱にまとめましたか？</span>
+            <input type="checkbox" id="check-trash" class="checkbox-pop accent-brand-accent h-4.5 w-4.5 rounded text-white cursor-pointer focus:ring-0">
+          </label>
+          <label onclick="updateChecklist()" class="flex items-center justify-between p-3 bg-slate-50 hover:bg-brand-cream/40 rounded-xl cursor-pointer transition-colors duration-200 border border-slate-100">
+            <span class="font-medium text-[#5a4e38]">ペットのおもちゃやごはん用ボウルなどお忘れ物はありませんか？</span>
+            <input type="checkbox" id="check-belongings" class="checkbox-pop accent-brand-accent h-4.5 w-4.5 rounded text-white cursor-pointer focus:ring-0">
+          </label>
+          <label onclick="updateChecklist()" class="flex items-center justify-between p-3 bg-slate-50 hover:bg-brand-cream/40 rounded-xl cursor-pointer transition-colors duration-200 border border-slate-100">
+            <span class="font-medium text-[#5a4e38]">窓とドアを施錠し、玄関タブレットでチェックアウトしましたか？</span>
+            <input type="checkbox" id="check-lock" class="checkbox-pop accent-brand-accent h-4.5 w-4.5 rounded text-white cursor-pointer focus:ring-0">
+          </label>
+        </div>
+      </div>
+
+      <!-- 周辺おすすめスポット -->
+      <div class="bg-white border border-brand-lightgold/50 rounded-2xl p-5 shadow-sm space-y-4">
+        <div class="flex items-center gap-2">
+          <span class="p-2 rounded-xl bg-amber-50 text-brand-accent icon-container"><span class="material-symbols-outlined">map</span></span>
+          <div>
+            <h3 class="font-bold text-sm">ペットと楽しむ秩父おすすめスポット</h3>
+            <p class="text-[10px] text-slate-400">距離やアクセス方法、ペット同伴に関する情報</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+          <!-- スポット1 -->
+          <div class="bg-brand-cream/40 p-3.5 border border-brand-lightgold/20 rounded-xl space-y-1.5 flex flex-col justify-between">
+            <div>
+              <span class="font-bold text-brand-dark block flex items-center gap-1">
+                <span class="icon-container text-brand-accent text-sm"><span class="material-symbols-outlined">park</span></span> 羊山公園 (車で約3〜5分)
+              </span>
+              <span class="text-[10px] text-brand-accent font-semibold">距離: 約1.5km</span>
+              <p class="text-slate-600 leading-relaxed text-[11px] mt-1">芝桜で有名。見晴らしの丘からは武甲山と秩父市街が一望できる絶景のお散歩ルート。リード着用でわんちゃんお散歩OK。</p>
+            </div>
+            <a href="https://maps.google.com/?q=秩父市羊山公園" target="_blank" class="inline-block text-brand-accent hover:underline font-semibold text-[11px] mt-2">マップで開く &rarr;</a>
+          </div>
+          <!-- スポット2 -->
+          <div class="bg-brand-cream/40 p-3.5 border border-brand-lightgold/20 rounded-xl space-y-1.5 flex flex-col justify-between">
+            <div>
+              <span class="font-bold text-brand-dark block flex items-center gap-1">
+                <span class="icon-container text-brand-accent text-sm"><span class="material-symbols-outlined">storefront</span></span> 道の駅 ちちぶ (車で約3分)
+              </span>
+              <span class="text-[10px] text-brand-accent font-semibold">距離: 約1.0km</span>
+              <p class="text-slate-600 leading-relaxed text-[11px] mt-1">秩父の特産品やB級グルメが集う場所。屋外テラススペース等はペット同伴OK。美味しい水汲み場も人気。</p>
+            </div>
+            <a href="https://maps.google.com/?q=道の駅ちちぶ" target="_blank" class="inline-block text-brand-accent hover:underline font-semibold text-[11px] mt-2">マップで開く &rarr;</a>
+          </div>
+          <!-- スポット3 (わん's広場) -->
+          <div class="bg-brand-cream/40 p-3.5 border border-brand-lightgold/20 rounded-xl space-y-1.5 flex flex-col justify-between">
+            <div>
+              <span class="font-bold text-brand-dark block flex items-center gap-1">
+                <span class="icon-container text-brand-accent text-sm"><span class="material-symbols-outlined">pets</span></span> わん's広場 (車で約10分)
+              </span>
+              <span class="text-[10px] text-brand-accent font-semibold">距離: 約5.5km</span>
+              <p class="text-slate-600 leading-relaxed text-[11px] mt-1">秩父エリア最大級 of ドッグラン。広々とした屋外芝生エリアに加え、雨の日や暑い夏でも安心な屋内施設、足洗い場、飼い主様がくつろげるカフェを併設しています。</p>
+            </div>
+            <a href="https://www.wanshiroba-chichibu.com/" target="_blank" class="inline-block text-brand-accent hover:underline font-semibold text-[11px] mt-2">公式サイトを見る &rarr;</a>
+          </div>
+          <!-- スポット4 -->
+          <div class="bg-brand-cream/40 p-3.5 border border-brand-lightgold/20 rounded-xl space-y-1.5 flex flex-col justify-between">
+            <div>
+              <span class="font-bold text-brand-dark block flex items-center gap-1">
+                <span class="icon-container text-brand-accent text-sm"><span class="material-symbols-outlined">forest</span></span> 秩父ミューズパーク (車で約15分)
+              </span>
+              <span class="text-[10px] text-brand-accent font-semibold">距離: 約7〜8km</span>
+              <p class="text-slate-600 leading-relaxed text-[11px] mt-1">広大な敷地に、約3kmにわたる美しいイチョウ並木道「スカイロード」があります。愛犬とののびのびとしたお散歩に最適。</p>
+            </div>
+            <a href="https://maps.google.com/?q=秩父ミューズパーク" target="_blank" class="inline-block text-brand-accent hover:underline font-semibold text-[11px] mt-2">マップで開く &rarr;</a>
+          </div>
+          <!-- スポット5 -->
+          <div class="bg-brand-cream/40 p-3.5 border border-brand-lightgold/20 rounded-xl space-y-1.5 flex flex-col justify-between col-span-1 sm:col-span-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <span class="font-bold text-brand-dark block flex items-center gap-1">
+                  <span class="icon-container text-brand-accent text-sm"><span class="material-symbols-outlined">water_lux</span></span> 長瀞・岩畳 & ライン下り
+                </span>
+                <span class="text-[10px] text-brand-accent font-semibold block">アクセス: 車で約25〜30分 (約15km)</span>
+                <p class="text-slate-600 leading-relaxed text-[11px] mt-1">大迫力の国の天然記念物「岩畳」の上をリードで散策可能。ライン下りも、ペット同伴乗船（ケージ必要）に対応。</p>
+              </div>
+              <div>
+                <span class="font-bold text-brand-dark block flex items-center gap-1">
+                  <span class="icon-container text-brand-accent text-sm"><span class="material-symbols-outlined">filter_hdr</span></span> 宝登山ロープウェイ
+                </span>
+                <span class="text-[10px] text-brand-accent font-semibold block">アクセス: 車で約30分 (約16km)</span>
+                <p class="text-slate-600 leading-relaxed text-[11px] mt-1">四季折々の花を楽しめる宝登山山頂へ。小型犬（10kg未満・頭まで隠れるハードケージ必要）と乗車可能です。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 動物病院情報（緊急ボタン付き） -->
+        <div class="bg-rose-50/70 border border-rose-100 rounded-xl p-4 space-y-3">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse"></span>
+            <span class="font-bold text-rose-950 text-xs">【緊急】近隣の動物病院情報</span>
+          </div>
+          <p class="text-rose-900/80 text-[11px] leading-relaxed">ご滞在中、万が一ペットの体調が優れない場合は、下記病院へご相談ください。タップすると詳細・地図（電話番号の確認等）が開きます。</p>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <a href="https://maps.app.goo.gl/55NCP5YawpewiP1YA" target="_blank" class="bg-white p-3 rounded-xl border border-rose-100 flex justify-between items-center hover:bg-rose-50/50 transition-colors duration-200 group">
+              <div>
+                <span class="font-bold text-rose-950 block text-[11px] flex items-center gap-1 group-hover:text-rose-700 transition-colors">
+                  秩父動物病院
+                  <span class="material-symbols-outlined text-[10px] text-slate-400">open_in_new</span>
+                </span>
+                <span class="text-rose-600 text-[10px]">秩父市上宮地町 / 駐車場あり</span>
+              </div>
+              <span class="bg-rose-50 text-rose-700 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1">
+                <span class="material-symbols-outlined text-xs">map</span>地図・詳細
+              </span>
+            </a>
+            <a href="https://maps.app.goo.gl/9QrPsREhby88Jv8Z6" target="_blank" class="bg-white p-3 rounded-xl border border-rose-100 flex justify-between items-center hover:bg-rose-50/50 transition-colors duration-200 group">
+              <div>
+                <span class="font-bold text-rose-950 block text-[11px] flex items-center gap-1 group-hover:text-rose-700 transition-colors">
+                  もとまち動物病院
+                  <span class="material-symbols-outlined text-[10px] text-slate-400">open_in_new</span>
+                </span>
+                <span class="text-rose-600 text-[10px]">秩父市本町 / 本町交差点近く</span>
+              </div>
+              <span class="bg-rose-50 text-rose-700 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1">
+                <span class="material-symbols-outlined text-xs">map</span>地図・詳細
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- オーナーからのメッセージ -->
+      <div class="text-center py-6 border-t border-brand-lightgold/20 text-[#8a7a5a] space-y-2">
+        <span class="text-brand-gold icon-container"><span class="material-symbols-outlined text-2xl">format_quote</span></span>
+        <p class="font-serif italic text-xs leading-relaxed max-w-md mx-auto">
+          「汚したら掃除をする」「夜間は静かにする」「火の扱いに気をつける」といった、人として当たり前のマナーを守っていただけるなら、あとはルールに縛られず、わが家のように気兼ねなく過ごしていただきたい。それが「にこの家」の願いです。
+        </p>
+        <div class="text-[10px] uppercase tracking-widest text-brand-gold/85 mt-2">&mdash; にこの家 オーナーより &mdash;</div>
+      </div>
+
+    </div>
+
+    <!-- ==================== 2. 高精度 A4 印刷プレビュー画面 ==================== -->
+    <div id="view-print" class="hidden print-preview-container">
+      
+      <!-- A4しおり本体（印刷時にはこのブロックのみが出力されます。アイコンはすべて取り除き格式ある伝統和洋デザインに統合しています） -->
+      <div class="a4-page mx-auto">
+        
+        <!-- HEADER（左右対称のロゴ＆QRコード枠、中央にハウスタイトルを配置） -->
+        <div class="flex items-center justify-between border-b-[1.5px] border-[#8c7a5a] pb-[4mm] mb-[5mm]">
+          <!-- 左上：ロゴ画像配置スペース（imagesフォルダのlogo.svgを参照） -->
+          <div class="w-[88px] h-[16mm] flex items-center justify-start">
+            <img src="./images/logo.svg" alt="ロゴ" class="max-w-full max-h-full object-contain" onerror="this.style.display='none';">
+          </div>
+          <!-- 中央：タイトル -->
+          <div class="text-center flex-1">
+            <h1 class="font-serif font-bold text-[34px] text-[#3a2e1e] tracking-[0.15em] leading-[1.15]">にこの家</h1>
+            <p class="font-serif text-[13px] text-[#8a7a5a] tracking-[0.3em] mt-[3px]">ハウスガイド</p>
+          </div>
+          <!-- 右上：デジタル版WebアプリへのアクセスQRコードスペース -->
+          <div class="w-[88px] h-[16mm] flex flex-col items-center justify-center border border-dashed border-slate-300 rounded p-[1mm]">
+            <img src="./images/qr.png" alt="QRコード" class="w-[10mm] h-[10mm] object-contain" onerror="this.style.display='none';">
+            <span class="text-[6px] text-[#8a7a5a] tracking-[0.05em] mt-[0.5mm] font-sans">スマホ用デジタルガイド</span>
+          </div>
+        </div>
+
+        <!-- INTRO -->
+        <div class="text-center py-[4mm] px-[8mm] bg-[#8c7a5b]/[0.06] border-y-[0.5px] border-[#c8b890] mb-[5mm]">
+          <p class="font-serif text-[9.5px] text-[#4a3e28] leading-[2.1] font-normal">秩父の豊かな自然に抱かれた「にこの家」へようこそ。</p>
+          <p class="font-serif text-[9.5px] text-[#4a3e28] leading-[2.1] font-normal">ここは、ペットがただの「同伴者」ではなく、一人の「大切な家族」として、同じ目線で過ごせる場所です。</p>
+          <p class="font-serif text-[9.5px] text-[#4a3e28] leading-[2.1] font-normal">窓から差し込む柔らかな光、季節ごとに表情を変える秩父の山々。</p>
+          <p class="font-serif text-[9.5px] text-[#4a3e28] leading-[2.1] font-normal">お部屋ごとに異なるこだわりの床材は、ペットの足への優しさと、心地よい肌触りを追求して選びました。</p>
+          <p class="font-serif text-[9.5px] text-[#4a3e28] leading-[2.1] font-normal">「あれはダメ、これはダメ」という制限はいりません。ソファで一緒にくつろぎ、同じ布団で眠り、朝まで温もりを感じる。</p>
+          <p class="font-serif text-[9.5px] text-[#4a3e28] leading-[2.1] font-normal">そんな、あたりまえのようでいて、何より幸せな「にこ（笑顔）」が溢れるひとときをお過ごしください。</p>
+        </div>
+
+        <!-- TWO-COLUMN GRID (紙のしおり側からはアイコンフォントをすべて削除し、純粋なタイポグラフィと枠線のみで表現しています) -->
+        <div class="grid grid-cols-2 gap-[3.5mm] mb-[3.5mm]">
+
+          <!-- 2. チェックイン・チェックアウト -->
+          <div class="border-[0.8px] border-[#c8b890] rounded-[3px] p-[4mm_4.5mm] bg-[#fffdf8]/80 relative flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1.5 border-b-[0.5px] border-[#d0c0a0] pb-[2mm] mb-[3mm]">
+                <h4 class="font-serif font-bold text-[11px] text-[#3a2e1e] tracking-[0.04em]"><span class="font-serif font-normal text-[#a08060] mr-0.5">2. </span>チェックイン・チェックアウト</h4>
+              </div>
+
+              <div class="mb-[2.5mm]">
+                <div class="font-serif font-bold text-[9.5px] text-[#4a3a20] tracking-[0.04em] mb-[1mm]">チェックイン</div>
+                <div class="font-serif font-bold text-[16px] text-[#3a2e1e] tracking-[0.05em] leading-none mb-[1.5mm]">15:00〜</div>
+                <div class="font-sans font-light text-[8px] text-[#5a4e38] leading-[1.8] space-y-0.5">
+                  <div class="flex items-start gap-1"><span class="text-[#b09060] flex-shrink-0">・</span><span>玄関備え付けのタブレットで「チェックイン」ボタンをタップ。</span></div>
+                  <div class="flex items-start gap-1"><span class="text-[#b09060] flex-shrink-0">・</span><span>事前メール内の「事前チェックインURL」からQRコードを表示し、タブレットにかざしてください。</span></div>
+                </div>
+              </div>
+
+              <div class="mb-[2.5mm]">
+                <div class="font-serif font-bold text-[9.5px] text-[#4a3a20] tracking-[0.04em] mb-[1mm]">チェックアウト</div>
+                <div class="font-serif font-bold text-[16px] text-[#3a2e1e] tracking-[0.05em] leading-none mb-[1.5mm]">〜10:00</div>
+                <div class="font-sans font-light text-[8px] text-[#5a4e38] leading-[1.8]">
+                  <div class="flex items-start gap-1"><span class="text-[#b09060] flex-shrink-0">・</span><span>タブレットの「チェックアウト」をタップし、同様にQRコードを読み込ませれば完了です。</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="font-sans font-light text-[7.5px] text-[#8a7a5a] leading-[1.75] pl-[2mm] border-l-[1.5px] border-[#d0b890]">
+              原則として時間の延長は承っておりません。余裕を持ってのご準備をお願いいたします。<br>
+              スマートロックの開錠番号は、事前メールをご確認ください。
+            </div>
+          </div>
+
+          <!-- 3. ペットとの過ごし方 -->
+          <div class="border-[0.8px] border-[#c8b890] rounded-[3px] p-[4mm_4.5mm] bg-[#fffdf8]/80 relative flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1.5 border-b-[0.5px] border-[#d0c0a0] pb-[2mm] mb-[3mm]">
+                <h4 class="font-serif font-bold text-[11px] text-[#3a2e1e] tracking-[0.04em]"><span class="font-serif font-normal text-[#a08060] mr-0.5">3. </span>ペットとの過ごし方</h4>
+              </div>
+
+              <div class="space-y-[2mm]">
+                <div>
+                  <div class="font-serif font-bold text-[8.5px] text-[#6a5030] tracking-[0.06em] mb-[0.5mm] flex items-center gap-1"><span class="w-[10px] h-[1px] bg-[#b09060] flex-shrink-0"></span>室内マナー & 添い寝</div>
+                  <div class="font-sans font-light text-[8px] text-[#5a4e38] leading-[1.85] space-y-0.5">
+                    <div class="flex items-start gap-1"><span class="text-[#b09060] flex-shrink-0">・</span><span>ソファやベッド添い寝OK。粗相防止はマナーパンツをご着用ください。</span></div>
+                    <div class="flex items-start gap-1"><span class="text-rose-700 font-bold flex-shrink-0">※</span><span class="text-rose-800 font-medium">排泄物は詰まり防止のため、絶対に室内トイレに流さないでください。</span></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="font-serif font-bold text-[8.5px] text-[#6a5030] tracking-[0.06em] mb-[0.5mm] flex items-center gap-1"><span class="w-[10px] h-[1px] bg-[#b09060] flex-shrink-0"></span>ドッグラン（お庭）</div>
+                  <div class="font-sans font-light text-[8px] text-[#5a4e38] leading-[1.8] space-y-0.5">
+                    <div class="flex items-start gap-1"><span class="text-[#b09060] flex-shrink-0">・</span><span>排泄はたっぷりの水で流し、うんちは回収してお庭の専用ゴミ箱へ。</span></div>
+                    <div class="flex items-start gap-1"><span class="text-[#b09060] flex-shrink-0">・</span><span>20時〜翌朝8時は、近隣への配慮としてドッグランではお静かに。</span></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="font-serif font-bold text-[8.5px] text-[#6a5030] tracking-[0.06em] mb-[0.5mm] flex items-center gap-1"><span class="w-[10px] h-[1px] bg-[#b09060] flex-shrink-0"></span>足洗い場</div>
+                  <div class="font-sans font-light text-[8px] text-[#5a4e38] leading-[1.8]">
+                    <div class="flex items-start gap-1"><span class="text-[#b09060] flex-shrink-0">・</span><span>玄関横とお庭に温水足洗い場・タオルを完備。</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. 設備・館内ルール -->
+          <div class="border-[0.8px] border-[#c8b890] rounded-[3px] p-[4mm_4.5mm] bg-[#fffdf8]/80 relative flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1.5 border-b-[0.5px] border-[#d0c0a0] pb-[2mm] mb-[3mm]">
+                <h4 class="font-serif font-bold text-[11px] text-[#3a2e1e] tracking-[0.04em]"><span class="font-serif font-normal text-[#a08060] mr-0.5">4. </span>設備・館内ルール</h4>
+              </div>
+
+              <div class="space-y-[2mm]">
+                <div>
+                  <div class="font-serif font-bold text-[8.5px] text-[#6a5030] tracking-[0.06em] mb-[0.5mm] flex items-center gap-1"><span class="w-[10px] h-[1px] bg-[#b09060] flex-shrink-0"></span>キッチン・完全禁煙</div>
+                  <div class="font-sans font-light text-[8px] text-[#5a4e38] leading-[1.8] space-y-0.5">
+                    <div>基本的な調理器具類、トースター完備（調味料なし）。</div>
+                    <div class="text-rose-800 font-medium">電子タバコ含め施設内すべて完全禁煙</div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="font-serif font-bold text-[8.5px] text-[#6a5030] tracking-[0.06em] mb-[0.5mm] flex items-center gap-1"><span class="w-[10px] h-[1px] bg-[#b09060] flex-shrink-0"></span>Wi-Fi（カメラで簡単自動接続）</div>
+                  <div class="flex items-center gap-2 mt-[1mm]">
+                    <div class="flex-grow bg-[#8c7a5b]/[0.08] rounded-[2px] p-[1.5mm_2.5mm] font-sans text-[7.5px] text-[#4a3a20] leading-[1.8]">
+                      SSID：<span class="font-semibold text-[#3a2e1e]">niconoie-2026</span><br>
+                      PASS：<span class="font-semibold text-[#3a2e1e]">livewithpets</span>
+                    </div>
+                    <div class="w-[12mm] h-[12mm] flex-shrink-0 bg-white p-[0.5mm] border border-[#c8b890] rounded-[2px] flex items-center justify-center">
+                      <!-- WIFI規格：WIFI:S:SSID;T:WPA;P:PASSWORD;; に則って自動生成しています -->
+                      <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=WIFI:S:niconoie-2026;T:WPA;P:livewithpets;;" alt="Wi-Fi QR" class="w-full h-full object-contain">
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="font-serif font-bold text-[8.5px] text-[#6a5030] tracking-[0.06em] mb-[0.5mm] flex items-center gap-1"><span class="w-[10px] h-[1px] bg-[#b09060] flex-shrink-0"></span>ゴミの分別</div>
+                  <div class="font-sans font-light text-[8px] text-[#5a4e38] leading-[1.8]">
+                    <div class="flex items-start gap-1"><span class="text-[#b09060] flex-shrink-0">燃</span><span>生ゴミ、プラスチック、ペットボトル</span></div>
+                    <div class="flex items-start gap-1"><span class="text-[#b09060] flex-shrink-0">缶</span><span>ビン・カンは専用の容器へ（うんちも専用箱へ）</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-1 mt-2 text-rose-800 leading-tight">
+              <div class="font-sans font-light text-[6.8px] pl-[2mm] border-l-[1.5px] border-rose-300">
+                火の扱い・消火確認には十分ご注意ください。<br>
+                ※故意や常識を超える汚損・破損（布団汚損等）は別途清掃費・修繕費を請求する場合がございます。
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. アメニティ一覧 -->
+          <div class="border-[0.8px] border-[#c8b890] rounded-[3px] p-[4mm_4.5mm] bg-[#fffdf8]/80 relative flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1.5 border-b-[0.5px] border-[#d0c0a0] pb-[2mm] mb-[3mm]">
+                <h4 class="font-serif font-bold text-[11px] text-[#3a2e1e] tracking-[0.04em]"><span class="font-serif font-normal text-[#a08060] mr-0.5">5. </span>アメニティ一覧</h4>
+              </div>
+
+              <div class="space-y-[3mm]">
+                <div>
+                  <div class="font-serif font-bold text-[8.5px] text-[#6a5030] tracking-[0.06em] mb-[1mm] flex items-center gap-1"><span class="w-[10px] h-[1px] bg-[#b09060] flex-shrink-0"></span>人間用</div>
+                  <div class="font-sans font-light text-[8px] text-[#5a4e38] leading-[1.8]">
+                    <div class="flex items-start gap-1"><span class="text-[#b09060] flex-shrink-0">・</span><span>歯ブラシ、タオル、シャンプー、ボディソープ、洗濯機、サロニア製ヘアドライヤー</span></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="font-serif font-bold text-[8.5px] text-[#6a5030] tracking-[0.06em] mb-[1mm] flex items-center gap-1"><span class="w-[10px] h-[1px] bg-[#b09060] flex-shrink-0"></span>ペット用</div>
+                  <div class="font-sans font-light text-[8px] text-[#5a4e38] leading-[1.8] space-y-0.5">
+                    <div class="flex items-start gap-1"><span class="text-[#b09060] flex-shrink-0">・</span><span>トイレシート、ウェットシート、消臭スプレー、コロコロ</span></div>
+                    <div class="flex items-start gap-1"><span class="text-[#b09060] flex-shrink-0">・</span><span>フードボウル（大・小 各2個）、押し入れDIYキャットタワー＆ケージ</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 6. 周辺ガイド（フル幅） -->
+        <div class="border-[0.8px] border-[#c8b890] rounded-[3px] p-[4mm_4.5mm] bg-[#fffdf8]/80 mb-[3.5mm]">
+          <div class="flex items-center gap-1.5 border-b-[0.5px] border-[#d0c0a0] pb-[2mm] mb-[2.5mm]">
+            <h4 class="font-serif font-bold text-[11px] text-[#3a2e1e] tracking-[0.04em]"><span class="font-serif font-normal text-[#a08060] mr-0.5">6. </span>周辺ガイド</h4>
+          </div>
+
+          <div class="grid grid-cols-2 gap-x-[6mm] gap-y-[2mm]">
+            <div>
+              <div class="font-serif font-semibold text-[8.5px] text-[#4a3e28] mb-[2px] flex items-center gap-1">
+                近隣の動物病院
+              </div>
+              <div class="font-sans font-light text-[7.5px] text-[#7a6a4a] leading-[1.65]">
+                秩父動物病院（秩父市上宮地町：詳細マップはデジタル版参照）<br>
+                もとまち動物病院（秩父市本町：本町交差点近く）
+              </div>
+            </div>
+            <div>
+              <div class="font-serif font-semibold text-[8.5px] text-[#4a3e28] mb-[2px] flex items-center gap-1">
+                おすすめ観光スポット
+              </div>
+              <div class="font-sans font-light text-[7.5px] text-[#7a6a4a] leading-[1.65]">
+                <strong class="font-medium text-[#4a3e28]">羊山公園</strong>（車3分 / お散歩OK） ／ <strong class="font-medium text-[#4a3e28]">わん's広場</strong>（車10分 / 秩父最大級ラン＆カフェ）<br>
+                <strong class="font-medium text-[#4a3e28]">秩父ミューズパーク</strong>（車15分） ／ <strong class="font-medium text-[#4a3e28]">長瀞・岩畳</strong>（車25〜30分）
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FOOTER / オーナーより -->
+        <div class="border-[0.8px] border-[#c8b890] rounded-[3px] p-[4.5mm_5mm] bg-[#8c7a5b]/[0.05] flex items-start gap-[5mm]">
+          <div>
+            <div class="font-serif font-bold text-[8.5px] text-[#8a7050] tracking-[0.1em] mb-[1.5mm]">オーナーより</div>
+            <div class="font-sans font-light text-[8px] text-[#5a4e38] leading-[1.9]">
+              「汚したら掃除をする」「夜間は静かにする」「火の扱いに気をつける」といった、人として当たり前のマナーを守っていただけるなら、あとはルールに縛られず、わが家のように気兼ねなく過ごしていただきたい。それが「にこの家」の願いです。<br>
+              お部屋ごとに異なる床材の足触りも、ぜひ楽しみながら過ごしてみてください。
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 下部固定プリンタボタン（印刷ビューのときのみ表示） -->
+  <div id="print-action-bar" class="no-print hidden fixed bottom-6 left-1/2 transform -translate-x-1/2 z-40">
+    <button onclick="window.print()" class="bg-brand-dark text-white hover:bg-brand-accent px-8 py-3.5 rounded-full shadow-2xl flex items-center gap-3 text-sm font-semibold tracking-wider transition-all duration-300 hover:scale-105">
+      <span class="icon-container"><span class="material-symbols-outlined text-lg">print</span></span>
+      A4サイズで印刷する (PDF保存)
+    </button>
+  </div>
+
+  <!-- クリップボードコピー通知ポップアップ -->
+  <div id="toast" class="no-print fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-slate-900/90 text-white px-5 py-3 rounded-xl shadow-lg text-xs font-semibold tracking-wider pointer-events-none opacity-0 transition-all duration-300 z-50 flex items-center gap-2">
+    <span class="icon-container text-emerald-400"><span class="material-symbols-outlined text-sm">check_circle</span></span>
+    <span id="toast-message">コピーしました</span>
+  </div>
+
+  <!-- インタラクティブお電話用モーダル -->
+  <div id="modal-tel" class="no-print fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+    <div class="bg-white rounded-2xl max-w-xs w-full p-6 shadow-2xl border border-brand-lightgold/30 text-center space-y-4">
+      <div class="w-12 h-12 bg-rose-50 rounded-full flex items-center justify-center mx-auto text-rose-500 icon-container">
+        <span class="material-symbols-outlined text-2xl">call</span>
+      </div>
+      <div class="space-y-1">
+        <h4 class="font-bold text-sm">電話をかけますか？</h4>
+        <p id="modal-tel-num" class="text-lg font-bold font-serif text-brand-dark">090-3818-8591</p>
+      </div>
+      <div class="flex gap-2">
+        <button onclick="closeModal('tel')" class="flex-1 py-2 border border-slate-200 hover:bg-slate-50 text-slate-500 text-xs font-semibold rounded-xl">キャンセル</button>
+        <a id="modal-tel-link" href="#" class="flex-1 py-2 bg-rose-500 hover:bg-rose-600 text-white text-xs font-semibold rounded-xl block text-center">発信する</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 1. ビュー（スマホ vs 印刷用A4）の切り替え制御
+    function switchView(mode) {
+      const viewDigital = document.getElementById('view-digital');
+      const viewPrint = document.getElementById('view-print');
+      const btnDigital = document.getElementById('btn-mode-digital');
+      const btnPrint = document.getElementById('btn-mode-print');
+      const printBar = document.getElementById('print-action-bar');
+
+      if (mode === 'print') {
+        viewDigital.classList.add('hidden');
+        viewPrint.classList.remove('hidden');
+        printBar.classList.remove('hidden');
+
+        btnPrint.className = "px-3.5 py-1.5 rounded-full font-medium transition-all duration-300 bg-brand-dark text-white shadow-sm flex items-center gap-1.5";
+        btnDigital.className = "px-3.5 py-1.5 rounded-full font-medium text-brand-gold hover:text-brand-dark transition-all duration-300 flex items-center gap-1.5";
+      } else {
+        viewDigital.classList.remove('hidden');
+        viewPrint.classList.add('hidden');
+        printBar.classList.add('hidden');
+
+        btnDigital.className = "px-3.5 py-1.5 rounded-full font-medium transition-all duration-300 bg-brand-dark text-white shadow-sm flex items-center gap-1.5";
+        btnPrint.className = "px-3.5 py-1.5 rounded-full font-medium text-brand-gold hover:text-brand-dark transition-all duration-300 flex items-center gap-1.5";
+      }
+    }
+
+    // 2. Wi-Fi テキストコピー
+    function copyText(elementId, successMessage) {
+      const textToCopy = document.getElementById(elementId).innerText;
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      
+      try {
+        document.execCommand('copy');
+        showToast(successMessage);
+      } catch (err) {
+        console.error('Copy failed, prompt manual copy.', err);
+      }
+      document.body.removeChild(tempTextArea);
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-message');
+      toastMsg.innerText = message;
+      
+      toast.classList.remove('opacity-0', 'translate-y-2');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      
+      setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'translate-y-2');
+      }, 2500);
+    }
+
+    // 3. アコーディオン切り替え
+    function toggleAccordion(id) {
+      const acc = document.getElementById(id);
+      const arrow = document.getElementById('arrow-' + id);
+      const isOpen = !acc.classList.contains('hidden');
+
+      if (isOpen) {
+        acc.classList.add('hidden');
+        if (arrow) {
+          arrow.innerText = '▼';
+        }
+      } else {
+        acc.classList.remove('hidden');
+        if (arrow) {
+          arrow.innerText = '▲';
+        }
+      }
+    }
+
+    function scrollToElement(id) {
+      const el = document.getElementById(id);
+      const accContent = el.querySelector('[id^="acc-"]');
+      if (accContent && accContent.classList.contains('hidden')) {
+        toggleAccordion(accContent.id);
+      }
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // 4. こだわりの「住まいラボ」床材＆アイデア インタラクティブデータ
+    const floorData = {
+      living: {
+        name: "足腰に優しい滑り防止コーティング床材",
+        desc: "リビング床には滑りにくい起毛タイプの床材や、特殊な滑り防止コーティングを施したフローリングを採用。足腰が弱くなったシニア犬や元気に走り回る猫ちゃんが滑って怪我をしないよう、安全と健康を第一に気遣った設計です。"
+      },
+      bedroom: {
+        name: "段差の低いロータイプマットレス寝室",
+        desc: "寝室には高さの極めて低いロータイプのマットレスを5組完備しています。段差が低いため、ペットが自分からスムーズに乗り降りでき、夜間や朝方も安心です。お布団の上での添い寝制限は一切ありませんので、一緒に川の字になってお休みいただけます。"
+      },
+      kitchen: {
+        name: "3口コンロ完備、ペット用のごはん作りも快適なフルキッチン",
+        desc: "3口ガスコンロ、冷蔵庫、電子レンジ、炊飯器、オーブントースター、電気ケトル、食器類一式を完備。地元の道の駅やスーパーで秩父の美味しい食材を買い出し、ペット用の手作りごはんやお子様・ご家族のごちそうを広々と調理いただけます。"
+      },
+      garden: {
+        name: "夏でも熱くなりにくい特殊遮熱人工芝ドッグラン（お庭）",
+        desc: "夏の強烈な太陽光の下でも熱を大幅にカットし、大切なペットの肉球が熱くなりにくい、特殊なプロ仕様の遮熱人工芝ドッグラン。高めで頑丈なウッドフェンス付きでノーリードOKですので、周囲を気にせず元気にのびのび遊ばせられます。"
+      }
+    };
+
+    function selectFloor(room) {
+      document.querySelectorAll('.floor-btn').forEach(btn => {
+        btn.className = "floor-btn p-3 rounded-xl border text-left transition-all duration-300 border-brand-lightgold/30 bg-slate-50 text-slate-600";
+      });
+
+      const activeBtn = document.getElementById('btn-floor-' + room);
+      activeBtn.className = "floor-btn p-3 rounded-xl border text-left transition-all duration-300 bg-brand-cream border-brand-accent text-brand-dark shadow-sm";
+
+      const data = floorData[room];
+      const display = document.getElementById('floor-display');
+      
+      display.style.opacity = 0;
+      setTimeout(() => {
+        document.getElementById('floor-material-name').innerText = data.name;
+        document.getElementById('floor-desc').innerText = data.desc;
+        display.style.opacity = 1;
+      }, 150);
+    }
+
+    // 5. チェックリスト進捗の管理とローカルストレージ保存
+    const checklistIds = ['check-ac', 'check-trash', 'check-belongings', 'check-lock'];
+
+    window.addEventListener('DOMContentLoaded', () => {
+      checklistIds.forEach(id => {
+        const checked = localStorage.getItem(id) === 'true';
+        const el = document.getElementById(id);
+        if (el) el.checked = checked;
+      });
+      updateChecklist();
+      startCountdown();
+    });
+
+    function updateChecklist() {
+      let completedCount = 0;
+      checklistIds.forEach(id => {
+        const checkbox = document.getElementById(id);
+        if (checkbox) {
+          localStorage.setItem(id, checkbox.checked);
+          if (checkbox.checked) completedCount++;
+        }
+      });
+
+      const progressLabel = document.getElementById('checklist-progress');
+      if (progressLabel) {
+        progressLabel.innerText = `${completedCount}/${checklistIds.length} 完了`;
+        
+        if (completedCount === checklistIds.length) {
+          progressLabel.className = "text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100 animate-bounce";
+        } else {
+          progressLabel.className = "text-xs font-semibold text-brand-accent bg-brand-cream px-2.5 py-1 rounded-full";
+        }
+      }
+    }
+
+    // 6. チェックアウト時間までのカウントダウンタイマー
+    function startCountdown() {
+      const timerElement = document.getElementById('checkout-timer');
+      if (!timerElement) return;
+      
+      function updateTimer() {
+        const now = new Date();
+        const checkoutTime = new Date();
+        checkoutTime.setHours(10, 0, 0, 0);
+
+        if (now > checkoutTime) {
+          checkoutTime.setDate(checkoutTime.getDate() + 1);
+        }
+
+        const diffMs = checkoutTime - now;
+        const diffHrs = Math.floor(diffMs / (1000 * 60 * 60));
+        const diffMins = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+
+        timerElement.innerText = `${diffHrs}時間 ${diffMins}分`;
+      }
+
+      updateTimer();
+      setInterval(updateTimer, 60000);
+    }
+
+    // 7. 電話呼び出し用簡易モーダル
+    function openModal(type, value) {
+      if (type === 'tel') {
+        document.getElementById('modal-tel-num').innerText = value;
+        document.getElementById('modal-tel-link').href = 'tel:' + value.replace(/[^0-9]/g, '');
+        const modal = document.getElementById('modal-tel');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+    }
+
+    function closeModal(type) {
+      if (type === 'tel') {
+        const modal = document.getElementById('modal-tel');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+  </script>
+</body>
+</html>
