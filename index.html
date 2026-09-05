@@ -1189,10 +1189,23 @@ footer {
 .lb-prev { left: 2vw; }
 .lb-next { right: 2vw; }
 @media (max-width: 768px) { .lb-nav { width: 42px; height: 42px; font-size: 1.5rem; } }
+
+/* === 画像の読み込み時レイアウトずれ防止（CLS対策） === */
+img { max-width: 100%; }
+.concept-imgs img, .story-img img, .labo-img img,
+.room-card img, .area-card img, .pm-card img { height: auto; }
+.concept-imgs img:first-child { aspect-ratio: 7/3; height: auto !important; }
+.concept-imgs img:nth-child(2), .concept-imgs img:nth-child(3) { aspect-ratio: 3/2; height: auto !important; }
+.story-img img { aspect-ratio: 3/2; height: auto !important; }
+.labo-img img { aspect-ratio: 3/2; height: auto !important; }
+.room-card img { aspect-ratio: 3/2; height: auto !important; }
+.area-card img { aspect-ratio: 3/2; height: auto !important; }
+.pm-card img { aspect-ratio: 3/2; height: auto !important; }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Zen+Maru+Gothic:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="./images/hero-bg.jpg" fetchpriority="high">
 </head>
 <body>
 
@@ -1273,9 +1286,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <div class="concept-inner">
       <div class="concept-imgs reveal">
-        <img src="./images/concept-main.jpg" alt="ベッドの上でくつろぐ看板犬にこ" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=900&q=80'">
-        <img src="./images/concept-nico.jpg" alt="大きなソファを置いた、にこの家のリビング" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80'">
-        <img src="./images/concept-dogrun.jpg" alt="ウッドフェンスと灯りに包まれた、夜のプライベートガーデン" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600&q=80'">
+        <img src="./images/concept-main.jpg" alt="ベッドの上でくつろぐ看板犬にこ" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=900&q=80'" width="1400" height="933">
+        <img src="./images/concept-nico.jpg" alt="大きなソファを置いた、にこの家のリビング" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80'" width="600" height="399">
+        <img src="./images/concept-dogrun.jpg" alt="ウッドフェンスと灯りに包まれた、夜のプライベートガーデン" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600&q=80'" width="600" height="450">
       </div>
       <div class="reveal">
         <p class="sec-eyebrow">About</p>
@@ -1305,7 +1318,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <div class="story-inner">
       <div class="story-img reveal">
-        <img src="./images/owner-story.jpg" alt="おもちゃで遊ぶ、にこの家の看板犬にこ" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&q=80'">
+        <img src="./images/owner-story.jpg" alt="おもちゃで遊ぶ、にこの家の看板犬にこ" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&q=80'" width="1200" height="800">
       </div>
       <div class="reveal">
         <p class="sec-eyebrow">Owner's Story</p>
@@ -1401,7 +1414,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       <div class="labo-img reveal">
-        <img src="./images/labo-concept.jpg" alt="押し入れを改装した、猫のためのキャットステップ" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=800&q=80'">
+        <img src="./images/labo-concept.jpg" alt="押し入れを改装した、猫のためのキャットステップ" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=800&q=80'" width="1200" height="800">
       </div>
     </div>
   </div>
@@ -1416,7 +1429,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="rooms-grid">
       <div class="room-card reveal">
-        <img src="./images/room-living.jpg" alt="木の天井と板張りに包まれた、にこの家のダイニング" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=900&q=80'">
+        <img src="./images/room-living.jpg" alt="木の天井と板張りに包まれた、にこの家のダイニング" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=900&q=80'" width="1200" height="800">
         <div class="room-body">
           <p class="room-label">Living & Dining</p>
           <h3>リビング・ダイニング</h3>
@@ -1424,7 +1437,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       <div class="room-card reveal">
-        <img src="./images/room-bedroom.jpg" alt="布団を並べてペットと添い寝ができる、にこの家の寝室" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?w=900&q=80'">
+        <img src="./images/room-bedroom.jpg" alt="布団を並べてペットと添い寝ができる、にこの家の寝室" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?w=900&q=80'" width="1200" height="800">
         <div class="room-body">
           <p class="room-label">Bedroom</p>
           <h3>寝室（2室）</h3>
@@ -1432,7 +1445,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       <div class="room-card reveal">
-        <img src="./images/room-dogrun.jpg" alt="ウッドフェンスに囲まれた、人工芝のプライベートドッグラン" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=900&q=80'">
+        <img src="./images/room-dogrun.jpg" alt="ウッドフェンスに囲まれた、人工芝のプライベートドッグラン" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=900&q=80'" width="1200" height="800">
         <div class="room-body">
           <p class="room-label">Dog Run</p>
           <h3>プライベートドッグラン</h3>
@@ -1440,7 +1453,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       <div class="room-card reveal">
-        <img src="./images/room-kitchen.jpg" alt="白タイルが映える、調理器具完備のキッチン" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&q=80'">
+        <img src="./images/room-kitchen.jpg" alt="白タイルが映える、調理器具完備のキッチン" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&q=80'" width="1200" height="800">
         <div class="room-body">
           <p class="room-label">Kitchen</p>
           <h3>フルキッチン</h3>
@@ -1462,7 +1475,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <div class="pm-shell">
     <button type="button" class="pm-btn prev" aria-label="前の写真へ">&#8249;</button>
-    <div class="photo-marquee"><div class="pm-track"><figure class="pm-card"><img src="./images/gallery-01.jpg" data-lg="./images/gallery-01-lg.jpg" alt="明るい光が差し込む洋室とバルコニー" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-02.jpg" data-lg="./images/gallery-02-lg.jpg" alt="ラタン家具を置いたテラス席" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-03.jpg" data-lg="./images/gallery-03-lg.jpg" alt="テラスから望む秩父の山並み" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-04.jpg" data-lg="./images/gallery-04-lg.jpg" alt="ふかふかの布団の上に立つ看板犬にこ" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-05.jpg" data-lg="./images/gallery-05-lg.jpg" alt="木の天井が広がるダイニング" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-06.jpg" data-lg="./images/gallery-06-lg.jpg" alt="食器やグラスが揃うキッチン収納" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-07.jpg" data-lg="./images/gallery-07-lg.jpg" alt="ロープブリッジのあるキャットステップ" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-08.jpg" data-lg="./images/gallery-08-lg.jpg" alt="ペット用食器とロボット掃除機を備えたカウンター" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-09.jpg" data-lg="./images/gallery-09-lg.jpg" alt="電子レンジ" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-10.jpg" data-lg="./images/gallery-10-lg.jpg" alt="コーヒーミルとドリッパー" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-11.jpg" data-lg="./images/gallery-11-lg.jpg" alt="トースターと電気ケトル" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-12.jpg" data-lg="./images/gallery-12-lg.jpg" alt="キャットステップとベンチのある玄関" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-13.jpg" data-lg="./images/gallery-13-lg.jpg" alt="土間に残した肉球のあしあと" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-14.jpg" data-lg="./images/gallery-14-lg.jpg" alt="温水洗浄便座付きのトイレ" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-15.jpg" data-lg="./images/gallery-15-lg.jpg" alt="ゆったりくつろげる浴室" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-16.jpg" data-lg="./images/gallery-16-lg.jpg" alt="広々とした2階の寝室" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-17.jpg" data-lg="./images/gallery-17-lg.jpg" alt="ミラーとアートを飾った壁面" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-18.jpg" data-lg="./images/gallery-18-lg.jpg" alt="館内に飾られた犬のアート" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-19.jpg" data-lg="./images/gallery-19-lg.jpg" alt="キャットタワーと動物のスツール" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-20.jpg" data-lg="./images/gallery-20-lg.jpg" alt="大きなソファを置いたリビング" loading="lazy" decoding="async"></figure></div>
+    <div class="photo-marquee"><div class="pm-track"><figure class="pm-card"><img src="./images/gallery-01.jpg" data-lg="./images/gallery-01-lg.jpg" alt="明るい光が差し込む洋室とバルコニー" loading="lazy" decoding="async" width="560" height="373"></figure><figure class="pm-card"><img src="./images/gallery-02.jpg" data-lg="./images/gallery-02-lg.jpg" alt="ラタン家具を置いたテラス席" loading="lazy" decoding="async" width="560" height="373"></figure><figure class="pm-card"><img src="./images/gallery-03.jpg" data-lg="./images/gallery-03-lg.jpg" alt="テラスから望む秩父の山並み" loading="lazy" decoding="async" width="560" height="373"></figure><figure class="pm-card"><img src="./images/gallery-04.jpg" data-lg="./images/gallery-04-lg.jpg" alt="ふかふかの布団の上に立つ看板犬にこ" loading="lazy" decoding="async" width="560" height="373"></figure><figure class="pm-card"><img src="./images/gallery-05.jpg" data-lg="./images/gallery-05-lg.jpg" alt="木の天井が広がるダイニング" loading="lazy" decoding="async" width="560" height="373"></figure><figure class="pm-card"><img src="./images/gallery-06.jpg" data-lg="./images/gallery-06-lg.jpg" alt="食器やグラスが揃うキッチン収納" loading="lazy" decoding="async" width="560" height="373"></figure><figure class="pm-card"><img src="./images/gallery-07.jpg" data-lg="./images/gallery-07-lg.jpg" alt="ロープブリッジのあるキャットステップ" loading="lazy" decoding="async" width="560" height="373"></figure><figure class="pm-card"><img src="./images/gallery-08.jpg" data-lg="./images/gallery-08-lg.jpg" alt="ペット用食器とロボット掃除機を備えたカウンター" loading="lazy" decoding="async" width="560" height="373"></figure><figure class="pm-card"><img src="./images/gallery-09.jpg" data-lg="./images/gallery-09-lg.jpg" alt="電子レンジ" loading="lazy" decoding="async" width="560" height="373"></figure><figure class="pm-card"><img src="./images/gallery-10.jpg" data-lg="./images/gallery-10-lg.jpg" alt="コーヒーミルとドリッパー" loading="lazy" decoding="async" width="560" height="373"></figure><figure class="pm-card"><img src="./images/gallery-11.jpg" data-lg="./images/gallery-11-lg.jpg" alt="トースターと電気ケトル" loading="lazy" decoding="async" width="560" height="373"></figure><figure class="pm-card"><img src="./images/gallery-12.jpg" data-lg="./images/gallery-12-lg.jpg" alt="キャットステップとベンチのある玄関" loading="lazy" decoding="async" width="560" height="373"></figure><figure class="pm-card"><img src="./images/gallery-13.jpg" data-lg="./images/gallery-13-lg.jpg" alt="土間に残した肉球のあしあと" loading="lazy" decoding="async" width="560" height="373"></figure><figure class="pm-card"><img src="./images/gallery-14.jpg" data-lg="./images/gallery-14-lg.jpg" alt="温水洗浄便座付きのトイレ" loading="lazy" decoding="async" width="560" height="373"></figure><figure class="pm-card"><img src="./images/gallery-15.jpg" data-lg="./images/gallery-15-lg.jpg" alt="ゆったりくつろげる浴室" loading="lazy" decoding="async" width="560" height="373"></figure><figure class="pm-card"><img src="./images/gallery-16.jpg" data-lg="./images/gallery-16-lg.jpg" alt="広々とした2階の寝室" loading="lazy" decoding="async" width="560" height="373"></figure><figure class="pm-card"><img src="./images/gallery-17.jpg" data-lg="./images/gallery-17-lg.jpg" alt="ミラーとアートを飾った壁面" loading="lazy" decoding="async" width="560" height="373"></figure><figure class="pm-card"><img src="./images/gallery-18.jpg" data-lg="./images/gallery-18-lg.jpg" alt="館内に飾られた犬のアート" loading="lazy" decoding="async" width="560" height="373"></figure><figure class="pm-card"><img src="./images/gallery-19.jpg" data-lg="./images/gallery-19-lg.jpg" alt="キャットタワーと動物のスツール" loading="lazy" decoding="async" width="560" height="373"></figure><figure class="pm-card"><img src="./images/gallery-20.jpg" data-lg="./images/gallery-20-lg.jpg" alt="大きなソファを置いたリビング" loading="lazy" decoding="async" width="560" height="373"></figure></div>
   </div>
 </section>
 <!-- LIGHTBOX -->
@@ -1535,7 +1548,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="area-grid">
       <div class="area-card reveal">
-        <img src="./images/area-nagatoro.jpg" alt="荒川の渓谷美が広がる長瀞の岩畳" loading="lazy" decoding="async">
+        <img src="./images/area-nagatoro.jpg" alt="荒川の渓谷美が広がる長瀞の岩畳" loading="lazy" decoding="async" width="800" height="533">
         <div class="area-body">
           <p class="area-dist">車で約25分（約15km）</p>
           <h4>長瀞の大自然</h4>
@@ -1544,7 +1557,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       <div class="area-card reveal">
-        <img src="./images/area-hitsujiyama.jpg" alt="芝桜の丘と武甲山を望む羊山公園" loading="lazy" decoding="async">
+        <img src="./images/area-hitsujiyama.jpg" alt="芝桜の丘と武甲山を望む羊山公園" loading="lazy" decoding="async" width="800" height="533">
         <div class="area-body">
           <p class="area-dist">車で約5分（約2km）</p>
           <h4>羊山公園の芝桜</h4>
@@ -1553,7 +1566,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       <div class="area-card reveal">
-        <img src="./images/area-michinoeki.jpg" alt="三峯神社の社殿" loading="lazy" decoding="async">
+        <img src="./images/area-michinoeki.jpg" alt="三峯神社の社殿" loading="lazy" decoding="async" width="800" height="532">
         <div class="area-body">
           <p class="area-dist">車で約60分（約35km）</p>
           <h4>三峯神社</h4>
@@ -1562,7 +1575,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       <div class="area-card reveal">
-        <img src="./images/area-musepark.jpg" alt="秩父ミューズパークのイチョウ並木" loading="lazy" decoding="async">
+        <img src="./images/area-musepark.jpg" alt="秩父ミューズパークのイチョウ並木" loading="lazy" decoding="async" width="800" height="532">
         <div class="area-body">
           <p class="area-dist">車で約10分（約5km）</p>
           <h4>秩父ミューズパーク</h4>
@@ -1571,7 +1584,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       <div class="area-card reveal">
-        <img src="./images/area-smooch.jpg" alt="SLパレオエクスプレス C58 363" loading="lazy" decoding="async">
+        <img src="./images/area-smooch.jpg" alt="SLパレオエクスプレス C58 363" loading="lazy" decoding="async" width="800" height="533">
         <div class="area-body">
           <p class="area-dist">車で約6分（最寄駅まで）</p>
           <h4>SLパレオエクスプレス</h4>
@@ -1580,7 +1593,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       <div class="area-card reveal">
-        <img src="./images/area-hodosan.jpg" alt="秩父のシンボル・武甲山" loading="lazy" decoding="async">
+        <img src="./images/area-hodosan.jpg" alt="秩父のシンボル・武甲山" loading="lazy" decoding="async" width="800" height="533">
         <div class="area-body">
           <p class="area-dist">市内各所から望めます</p>
           <h4>壮大な武甲山</h4>
