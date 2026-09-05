@@ -1132,6 +1132,63 @@ footer {
   color: var(--terra);
 }
 .price-amount { font-family: 'Zen Maru Gothic', sans-serif; font-weight: 500; }
+
+/* === フォトギャラリー（横流し＋拡大） === */
+.photo-gallery { background: var(--paper); padding-bottom: 5.5rem; }
+.pg-lead { font-size: 0.8rem; color: var(--text-lt); font-weight: 300; }
+.pm-shell { position: relative; }
+.photo-marquee { overflow-x: auto; scrollbar-width: none; cursor: grab; }
+.photo-marquee::-webkit-scrollbar { display: none; }
+.photo-marquee.dragging { cursor: grabbing; user-select: none; }
+.pm-track { display: flex; gap: 14px; width: max-content; padding: 0 1.2rem; }
+.pm-card { margin: 0; width: 260px; flex-shrink: 0; }
+.pm-card img {
+  width: 100%; height: 175px; object-fit: cover; display: block;
+  border-radius: 6px; cursor: zoom-in; transition: transform .35s, box-shadow .35s;
+}
+.pm-card img:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(43,40,35,.14); }
+.pm-btn {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 5;
+  width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,.95);
+  border: 1px solid var(--linen); color: var(--terra); font-size: 1.5rem; line-height: 1;
+  cursor: pointer; box-shadow: 0 4px 14px rgba(43,40,35,.15);
+  display: flex; align-items: center; justify-content: center; padding: 0;
+  transition: background .2s, color .2s;
+}
+.pm-btn:hover { background: var(--terra); color: #fff; border-color: var(--terra); }
+.pm-btn.prev { left: 12px; }
+.pm-btn.next { right: 12px; }
+@media (max-width: 768px) { .pm-btn { display: none; } .pm-card { width: 220px; } .pm-card img { height: 150px; } }
+
+/* ライトボックス */
+.lightbox {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(25,22,19,.93);
+  display: flex; align-items: center; justify-content: center;
+  padding: 4vh 5vw;
+}
+.lightbox[hidden] { display: none; }
+.lb-img { max-width: 100%; max-height: 82vh; object-fit: contain; border-radius: 4px; }
+.lb-cap {
+  position: absolute; bottom: 3vh; left: 0; right: 0; text-align: center;
+  color: rgba(255,255,255,.85); font-size: .82rem; letter-spacing: .06em; padding: 0 1rem;
+}
+.lb-close {
+  position: absolute; top: 2vh; right: 3vw; width: 44px; height: 44px;
+  background: none; border: none; color: #fff; font-size: 2.2rem; line-height: 1;
+  cursor: pointer; opacity: .8;
+}
+.lb-close:hover { opacity: 1; }
+.lb-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 52px; height: 52px; border-radius: 50%;
+  background: rgba(255,255,255,.12); border: none; color: #fff;
+  font-size: 2rem; line-height: 1; cursor: pointer; transition: background .2s;
+}
+.lb-nav:hover { background: rgba(255,255,255,.25); }
+.lb-prev { left: 2vw; }
+.lb-next { right: 2vw; }
+@media (max-width: 768px) { .lb-nav { width: 42px; height: 42px; font-size: 1.5rem; } }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1394,49 +1451,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<!-- AMENITY SECTION -->
-<section class="amenity" id="amenity" style="background: var(--offwhite);">
+<!-- PHOTO GALLERY (rooms直下) -->
+<section class="photo-gallery">
   <div class="container">
-    <div class="reveal" style="text-align: center; margin-bottom: 3.5rem;">
-      <p class="sec-eyebrow">Amenities</p>
-      <h2 class="sec-title">充実のペット用アメニティ＆設備</h2>
-      <p class="sec-body" style="max-width: 600px; margin: 0 auto;">荷物は最小限で大丈夫。愛犬・愛猫との宿泊に欠かせない、充実 of ペット用アイテムをすべて無料でご用意しています。</p>
-    </div>
-    
-    <div class="features-grid" style="margin-bottom: 2rem;">
-      <div class="feat-card reveal">
-        <span class="sec-eyebrow" style="font-size: 0.65rem; margin-bottom: 0.8rem; display: block;">For Dogs</span>
-        <h3>ワンちゃん用アメニティ</h3>
-        <p style="font-size: 0.85rem; line-height: 2;">
-          ・レギュラーサイズペットシーツ<br>
-          ・消臭除菌スプレー<br>
-          ・フード・お水用ステンレスボウル<br>
-          ・ウエットティッシュ<br>
-          ・足拭きタオル ＆ 粘着ローラー（コロコロ）
-        </p>
-      </div>
-      <div class="feat-card reveal">
-        <span class="sec-eyebrow" style="font-size: 0.65rem; margin-bottom: 0.8rem; display: block;">For Cats & Others</span>
-        <h3>猫ちゃん・小動物用アメニティ</h3>
-        <p style="font-size: 0.85rem; line-height: 2;">
-          ・押し入れ内蔵キャットタワー<br>
-          ・フード・お水用ボウル
-        </p>
-      </div>
-      <div class="feat-card reveal">
-        <span class="sec-eyebrow" style="font-size: 0.65rem; margin-bottom: 0.8rem; display: block;">For Humans</span>
-        <h3>人間用アメニティ・設備</h3>
-        <p style="font-size: 0.85rem; line-height: 2;">
-          ・シャンプー、コンディショナー、ボディソープ<br>
-          ・バスタオル、フェイスタオル、歯ブラシ<br>
-          ・ヘアドライヤー（サロニア製）<br>
-          ・洗濯機（洗剤あり。長期滞在にも便利）<br>
-          ・無料高速Wi-Fi完備（ワーケーション対応）
-        </p>
-      </div>
+    <div class="reveal" style="text-align:center;margin-bottom:2.2rem;">
+      <p class="sec-eyebrow">Gallery</p>
+      <h2 class="sec-title">にこの家の、そのほかの様子</h2>
+      <p class="pg-lead">写真をタップすると大きく表示されます。</p>
     </div>
   </div>
+  <div class="pm-shell">
+    <button type="button" class="pm-btn prev" aria-label="前の写真へ">&#8249;</button>
+    <div class="photo-marquee"><div class="pm-track"><figure class="pm-card"><img src="./images/gallery-01.jpg" data-lg="./images/gallery-01-lg.jpg" alt="明るい光が差し込む洋室とバルコニー" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-02.jpg" data-lg="./images/gallery-02-lg.jpg" alt="ラタン家具を置いたテラス席" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-03.jpg" data-lg="./images/gallery-03-lg.jpg" alt="テラスから望む秩父の山並み" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-04.jpg" data-lg="./images/gallery-04-lg.jpg" alt="ふかふかの布団の上に立つ看板犬にこ" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-05.jpg" data-lg="./images/gallery-05-lg.jpg" alt="木の天井が広がるダイニング" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-06.jpg" data-lg="./images/gallery-06-lg.jpg" alt="食器やグラスが揃うキッチン収納" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-07.jpg" data-lg="./images/gallery-07-lg.jpg" alt="ロープブリッジのあるキャットステップ" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-08.jpg" data-lg="./images/gallery-08-lg.jpg" alt="ペット用食器とロボット掃除機を備えたカウンター" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-09.jpg" data-lg="./images/gallery-09-lg.jpg" alt="電子レンジ" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-10.jpg" data-lg="./images/gallery-10-lg.jpg" alt="コーヒーミルとドリッパー" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-11.jpg" data-lg="./images/gallery-11-lg.jpg" alt="トースターと電気ケトル" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-12.jpg" data-lg="./images/gallery-12-lg.jpg" alt="キャットステップとベンチのある玄関" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-13.jpg" data-lg="./images/gallery-13-lg.jpg" alt="土間に残した肉球のあしあと" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-14.jpg" data-lg="./images/gallery-14-lg.jpg" alt="温水洗浄便座付きのトイレ" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-15.jpg" data-lg="./images/gallery-15-lg.jpg" alt="ゆったりくつろげる浴室" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-16.jpg" data-lg="./images/gallery-16-lg.jpg" alt="広々とした2階の寝室" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-17.jpg" data-lg="./images/gallery-17-lg.jpg" alt="ミラーとアートを飾った壁面" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-18.jpg" data-lg="./images/gallery-18-lg.jpg" alt="館内に飾られた犬のアート" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-19.jpg" data-lg="./images/gallery-19-lg.jpg" alt="キャットタワーと動物のスツール" loading="lazy" decoding="async"></figure><figure class="pm-card"><img src="./images/gallery-20.jpg" data-lg="./images/gallery-20-lg.jpg" alt="大きなソファを置いたリビング" loading="lazy" decoding="async"></figure></div>
+  </div>
 </section>
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" hidden>
+  <button type="button" class="lb-close" aria-label="閉じる">&times;</button>
+  <button type="button" class="lb-nav lb-prev" aria-label="前の写真">&#8249;</button>
+  <img class="lb-img" id="lbImg" src="" alt="">
+  <button type="button" class="lb-nav lb-next" aria-label="次の写真">&#8250;</button>
+  <p class="lb-cap" id="lbCap"></p>
+</div>
+
 
 <!-- PRICE -->
 <section class="price" id="price">
@@ -1897,6 +1934,70 @@ document.querySelectorAll('.prevent-desktop-link').forEach(link => {
       btn.disabled=false; btn.textContent='現在地からお宿までの所要時間を算出';
       note.textContent='現在地を取得できませんでした。位置情報の許可設定をご確認ください。';
     },{enableHighAccuracy:false,timeout:8000,maximumAge:300000});
+  });
+})();
+</script>
+<script>
+(function(){
+  var mq = document.querySelector('.photo-marquee');
+  if(!mq) return;
+  var track = mq.firstElementChild;
+  track.innerHTML += track.innerHTML;                 // シームレスループ用に複製
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var speed = reduce ? 0 : 0.5, paused = false, idle;
+
+  function half(){ return track.scrollWidth / 2; }
+  function wrap(){
+    var h = half();
+    if(mq.scrollLeft >= h) mq.scrollLeft -= h;
+    else if(mq.scrollLeft <= 0) mq.scrollLeft += h;
+  }
+  mq.addEventListener('scroll', wrap, {passive:true});
+  (function loop(){ if(!paused && speed) mq.scrollLeft += speed; requestAnimationFrame(loop); })();
+  function pause(ms){ paused = true; clearTimeout(idle); idle = setTimeout(function(){ paused = false; }, ms || 3500); }
+  ['touchstart','wheel','pointerdown'].forEach(function(e){ mq.addEventListener(e, function(){ pause(); }, {passive:true}); });
+
+  document.querySelectorAll('.pm-btn').forEach(function(b){
+    b.addEventListener('click', function(){
+      pause(5000);
+      var c = track.querySelector('figure');
+      var step = c ? c.getBoundingClientRect().width + 14 : 274;
+      mq.scrollBy({ left: (b.classList.contains('next') ? 1 : -1) * step, behavior: 'smooth' });
+    });
+  });
+
+  // ドラッグ横スクロール（クリックとの誤爆を防ぐ）
+  var down=false, moved=false, sx=0, sl=0;
+  mq.addEventListener('mousedown', function(e){ down=true; moved=false; sx=e.pageX; sl=mq.scrollLeft; mq.classList.add('dragging'); e.preventDefault(); });
+  window.addEventListener('mousemove', function(e){ if(down){ if(Math.abs(e.pageX-sx)>4) moved=true; mq.scrollLeft = sl-(e.pageX-sx); } });
+  window.addEventListener('mouseup', function(){ down=false; mq.classList.remove('dragging'); });
+
+  // ライトボックス
+  var lb=document.getElementById('lightbox'), lbImg=document.getElementById('lbImg'), lbCap=document.getElementById('lbCap');
+  var imgs = Array.prototype.slice.call(track.querySelectorAll('img')).slice(0, track.querySelectorAll('img').length/2);
+  var idx = 0;
+  function open(i){
+    idx = (i + imgs.length) % imgs.length;
+    var el = imgs[idx];
+    lbImg.src = el.getAttribute('data-lg') || el.src;
+    lbImg.alt = el.alt; lbCap.textContent = el.alt;
+    lb.hidden = false; document.body.style.overflow = 'hidden';
+  }
+  function close(){ lb.hidden = true; document.body.style.overflow = ''; }
+  track.addEventListener('click', function(e){
+    var t = e.target.closest('img'); if(!t || moved) return;
+    var all = Array.prototype.slice.call(track.querySelectorAll('img'));
+    open(all.indexOf(t) % imgs.length);
+  });
+  lb.querySelector('.lb-close').addEventListener('click', close);
+  lb.querySelector('.lb-prev').addEventListener('click', function(e){ e.stopPropagation(); open(idx-1); });
+  lb.querySelector('.lb-next').addEventListener('click', function(e){ e.stopPropagation(); open(idx+1); });
+  lb.addEventListener('click', function(e){ if(e.target === lb) close(); });
+  document.addEventListener('keydown', function(e){
+    if(lb.hidden) return;
+    if(e.key === 'Escape') close();
+    if(e.key === 'ArrowLeft') open(idx-1);
+    if(e.key === 'ArrowRight') open(idx+1);
   });
 })();
 </script>
