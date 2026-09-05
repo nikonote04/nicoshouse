@@ -64,10 +64,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "どんな種類のペットを何頭まで連れていけますか？",
+      "name": "にこの家では、どんな種類のペットを何頭まで連れていけますか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "室内飼いされている犬（小型・中型・大型）、猫、うさぎ、フェレット、その他小動物であれば何頭でもご宿泊いただけます。頭数制限や特別追加料金はありません。"
+        "text": "秩父のペット民泊「にこの家」には頭数制限がなく、室内飼いの犬（小型・中型・大型）、猫、うさぎ、フェレットなどの小動物を、何頭でも一緒にご宿泊いただけます。頭数や犬のサイズによる追加料金もかかりません。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "犬と猫が一緒でも大丈夫ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "大丈夫です。にこの家は犬と猫など、種類の異なるペットの同時宿泊を歓迎しています。"
       }
     },
     {
@@ -75,7 +83,55 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       "name": "ペットはベッドに上がってもいいですか？添い寝できますか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "はい、もちろんです！寝室のロータイプマットレスへの立ち入り制限は一切ありません。おうちと同じようにみんなで川の字になって添い寝をしていただけます。"
+        "text": "はい。にこの家では寝室のロータイプマットレスへの立ち入り制限が一切なく、ケージで眠らせる必要もありません。おうちと同じように、みんなで川の字になって添い寝していただけます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "鳴き声で近隣に迷惑がかかりませんか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "にこの家では近隣住民の方に事前のご案内を済ませ、ご理解をいただいています。一棟貸切のため、他の宿泊客への気兼ねも不要です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "チェックイン・チェックアウトの時間を教えてください。",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "にこの家のチェックインは15:00、チェックアウトは10:00です。セルフチェックイン方式のため、到着後すぐにご家族だけの時間を過ごせます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "人間だけの宿泊もできますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "可能です。にこの家はペット連れでない方もご利用いただける一棟貸しの宿です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ペットが粗相をしてしまった場合はどうなりますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "にこの家では清掃道具をご用意していますので、清掃にご協力をお願いします。ご不安な場合はマナーパンツ等の着用がおすすめです。著しい破損や特別な清掃が必要な場合は、別途費用を請求させていただく可能性があります。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "周辺にペットと一緒に食事を楽しめるレストランはありますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "にこの家の周辺には、車で5分ほどの距離にペット同伴で入れる飲食店がいくつかあります。またキッチンにコンロ・冷蔵庫・食器類を完備していますので、地元で買った秩父の食材を宿で調理して楽しむ滞在も人気です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "近くに、夜間対応などの動物病院はありますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "にこの家では、万が一の体調不良に備えて秩父市内のペットにやさしい複数の動物病院の連絡先を、宿内のウェルカムガイドに掲載しています。緊急時やご不安な際はお電話でもお気軽にお問い合わせください。"
       }
     },
     {
@@ -83,7 +139,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       "name": "連泊の割引やワーケーション利用は可能ですか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "はい、2泊以上の長期滞在・中長期連泊の際は特別料金割引をご用意しています。高速無料Wi-Fiや机を完備しておりワーケーション利用も大歓迎です。"
+        "text": "はい。にこの家では2泊以上の長期滞在に特別料金の割引をご用意しています。室内には高速無料Wi-Fiと机を備えており、ガーデンの横で愛犬を見守りながら過ごすワーケーション利用も歓迎しています。"
       }
     }
   ]
@@ -1050,6 +1106,18 @@ footer {
     display: inline-block;
   }
 }
+
+/* === 所要時間算出（LPと共通仕様） === */
+.route-btn{display:block;width:100%;margin-top:16px;background:#fff;color:#D0722F;border:2px solid #D0722F;border-radius:999px;padding:15px 20px;font-weight:700;font-size:.95rem;letter-spacing:.06em;cursor:pointer;transition:background .2s,color .2s;font-family:inherit}
+.route-btn:hover{background:#D0722F;color:#fff}
+.route-btn:disabled{opacity:.6;cursor:wait}
+.route-result{margin-top:18px;background:#FAF7F1;border-radius:20px;padding:24px 20px;text-align:center}
+.rr-main{margin:0;line-height:1.4}
+.rr-time{font-weight:700;font-size:clamp(1.7rem,6vw,2.2rem);color:#D0722F;display:block}
+.rr-unit{font-size:.8rem;color:#55514A;display:block;margin-top:4px}
+.rr-sub{font-size:.9rem;margin:10px 0 14px}
+.rr-link{font-size:.88rem;color:#D0722F;font-weight:700;text-decoration:underline;text-underline-offset:4px}
+.route-note{font-size:.8rem;color:#55514A;margin-top:10px;text-align:center;line-height:1.7}
 </style>
 </head>
 <body>
@@ -1131,9 +1199,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <div class="concept-inner">
       <div class="concept-imgs reveal">
-        <img src="./images/concept-main.jpg" alt="にこの家のベッドの上で、愛犬と一緒に添い寝をしてくつろぐオーナー夫婦" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=900&q=80'">
-        <img src="./images/concept-nico.jpg" alt="にこの家の看板犬、柴犬のニコちゃん" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80'">
-        <img src="./images/concept-dogrun.jpg" alt="ウッドフェンスに囲まれた、にこの家の広々としたプライベートドッグラン" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600&q=80'">
+        <img src="./images/concept-main.jpg" alt="白い寝具の上でくつろぐ看板犬にこ" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=900&q=80'">
+        <img src="./images/concept-nico.jpg" alt="にこの家の看板犬・ビションフリーゼのにこ" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80'">
+        <img src="./images/concept-dogrun.jpg" alt="ウッドフェンスと灯りに包まれた、夜のプライベートガーデン" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600&q=80'">
       </div>
       <div class="reveal">
         <p class="sec-eyebrow">About</p>
@@ -1163,7 +1231,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <div class="story-inner">
       <div class="story-img reveal">
-        <img src="./images/owner-story.jpg" alt="自然豊かな秩父で、愛犬にこと一緒に楽しくお散歩をする様子" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&q=80'">
+        <img src="./images/owner-story.jpg" alt="お出かけの支度をして待つ、にこの家の看板犬たち" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&q=80'">
       </div>
       <div class="reveal">
         <p class="sec-eyebrow">Owner's Story</p>
@@ -1259,7 +1327,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       <div class="labo-img reveal">
-        <img src="./images/labo-concept.jpg" alt="ペット共生住宅の設備。愛犬の足腰を守る滑らないフローリングの様子" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=800&q=80'">
+        <img src="./images/labo-concept.jpg" alt="ペットの足腰にやさしい、滑りにくい床材" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=800&q=80'">
       </div>
     </div>
   </div>
@@ -1274,7 +1342,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="rooms-grid">
       <div class="room-card reveal">
-        <img src="./images/room-living.jpg" alt="明るく広々とした、リビング・ダイニングルーム" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=900&q=80'">
+        <img src="./images/room-living.jpg" alt="木のぬくもりに包まれた、にこの家のリビング" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=900&q=80'">
         <div class="room-body">
           <p class="room-label">Living & Dining</p>
           <h3>リビング・ダイニング</h3>
@@ -1282,7 +1350,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       <div class="room-card reveal">
-        <img src="./images/room-bedroom.jpg" alt="お布団でペットと一緒に添い寝ができる、心地よい和洋寝室" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?w=900&q=80'">
+        <img src="./images/room-bedroom.jpg" alt="ペットと添い寝ができる、にこの家の寝室" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?w=900&q=80'">
         <div class="room-body">
           <p class="room-label">Bedroom</p>
           <h3>寝室（2室）</h3>
@@ -1290,7 +1358,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       <div class="room-card reveal">
-        <img src="./images/room-dogrun.jpg" alt="フェンス付きで安心、遮熱人工芝が敷かれたプライベートドッグラン" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=900&q=80'">
+        <img src="./images/room-dogrun.jpg" alt="人工芝を敷いた、フェンス付きのプライベートガーデン" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=900&q=80'">
         <div class="room-body">
           <p class="room-label">Dog Run</p>
           <h3>プライベートドッグラン</h3>
@@ -1298,7 +1366,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       <div class="room-card reveal">
-        <img src="./images/room-kitchen.jpg" alt="調理器具や食器類が完備された、自炊が楽しめる充実のフルキッチン" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&q=80'">
+        <img src="./images/room-kitchen.jpg" alt="調理器具と食器を備えた、にこの家のキッチン" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&q=80'">
         <div class="room-body">
           <p class="room-label">Kitchen</p>
           <h3>フルキッチン</h3>
@@ -1413,57 +1481,57 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="area-grid">
       <div class="area-card reveal">
-        <img src="./images/area-hitsujiyama.jpg" alt="春には美しいピンクの芝桜が一面に広がる、秩父の羊山公園" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1445543949571-ffc3e0e2f55e?w=600&q=80'">
+        <img src="./images/area-nagatoro.jpg" alt="荒川の渓谷美が広がる長瀞の岩畳" loading="lazy" decoding="async">
         <div class="area-body">
-          <p class="area-dist">車で約3〜5分（約1.5km）</p>
-          <h4>羊山公園</h4>
-          <p>芝桜の丘で全国的にも有名。見晴らしの丘からは、武甲山と秩父市街が一望できる絶景のお散歩ルートです。</p>
+          <p class="area-dist">車で約25分（約15km）</p>
+          <h4>長瀞の大自然</h4>
+          <p>国指定名勝・天然記念物の岩畳と、澄んだ荒川の渓谷美。川沿いの遊歩道は、ペットとの散策にも人気のコースです。</p>
+          <span class="area-pet">リード着用で散策OK（施設ごとのルールをご確認ください）</span>
+        </div>
+      </div>
+      <div class="area-card reveal">
+        <img src="./images/area-hitsujiyama.jpg" alt="芝桜の丘と武甲山を望む羊山公園" loading="lazy" decoding="async">
+        <div class="area-body">
+          <p class="area-dist">車で約5分（約2km）</p>
+          <h4>羊山公園の芝桜</h4>
+          <p>芝桜の丘で全国的に知られる公園。見晴らしの丘からは、武甲山と秩父市街を一望できます。</p>
           <span class="area-pet">リード着用でわんちゃんお散歩OK</span>
         </div>
       </div>
       <div class="area-card reveal">
-        <img src="./images/area-michinoeki.jpg" alt="地元の美味しいグルメや特産品が並ぶ、道の駅ちちぶの様子" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=80'">
+        <img src="./images/area-michinoeki.jpg" alt="三峯神社の社殿" loading="lazy" decoding="async">
         <div class="area-body">
-          <p class="area-dist">車で約3分（約1km）</p>
-          <h4>道の駅 ちちぶ</h4>
-          <p>秩父の特産品やお土産、B級グルメが集結するスポット。外には美味しい立ち食いそばや水汲み場もあります。</p>
-          <span class="area-pet">屋外テラススペース等のみペットOK</span>
+          <p class="area-dist">車で約60分（約35km）</p>
+          <h4>三峯神社</h4>
+          <p>標高約1,100mの山中に鎮座する、秩父三社のひとつ。雲海に浮かぶ社殿の荘厳な景色で知られています。</p>
+          <span class="area-pet">ペット同伴の可否は公式サイトで最新情報をご確認ください</span>
         </div>
       </div>
       <div class="area-card reveal">
-        <img src="./images/area-smooch.jpg" alt="ワンちゃん用のご飯メニューも充実した、秩父の古民家ドッグカフェ" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1541167760496-1628856ab772?w=600&q=80'">
+        <img src="./images/area-musepark.jpg" alt="秩父ミューズパークのイチョウ並木" loading="lazy" decoding="async">
         <div class="area-body">
-          <p class="area-dist">車で約5分（約1.8km）</p>
-          <h4>doggie cafe SMOOCH</h4>
-          <p>ペット愛に溢れる古民家風のドッグカフェ。全犬種・猫ちゃん店内同伴OKで、ヘルシーな犬用メニューも大変人気です。</p>
-          <span class="area-pet">全犬種・猫ちゃんも店内同伴OK</span>
-        </div>
-      </div>
-      <div class="area-card reveal">
-        <img src="./images/area-musepark.jpg" alt="木漏れ日のなか、約3キロの並木道をお散歩できる秩父ミューズパーク" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1492889971304-ac16ab4a4a5a?w=600&q=80'">
-        <div class="area-body">
-          <p class="area-dist">車で約15分（約7〜8km）</p>
+          <p class="area-dist">車で約10分（約5km）</p>
           <h4>秩父ミューズパーク</h4>
-          <p>広大な敷地の中に、約3kmにわたる美しいイチョウ並木道「スカイロード」があります。愛犬との朝夕のお散歩に最適なコースです。</p>
-          <span class="area-pet">リード着用でお散歩OK</span>
+          <p>約3kmのイチョウ並木が続く広大な公園。秋の黄葉はもちろん、四季を通じて木漏れ日の散歩が楽しめます。</p>
+          <span class="area-pet">リード着用でわんちゃんお散歩OK</span>
         </div>
       </div>
       <div class="area-card reveal">
-        <img src="./images/area-nagatoro.jpg" alt="国の名勝・長瀞の岩畳と、川下りを楽しめるライン下り船" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1511316695145-4992006ffddb?w=600&q=80'">
+        <img src="./images/area-smooch.jpg" alt="SLパレオエクスプレス C58 363" loading="lazy" decoding="async">
         <div class="area-body">
-          <p class="area-dist">車で約25〜30分（約15km）</p>
-          <h4>長瀞・岩畳 ＆ ライン下り</h4>
-          <p>美しい自然が織りなす大迫力の「岩畳」の上をリードをつけてのんびりお散歩。川下りのライン下りも、ペット同伴乗船が可能です。</p>
-          <span class="area-pet">岩畳お散歩OK / ライン下りはケージ必要</span>
+          <p class="area-dist">車で約6分（最寄駅まで）</p>
+          <h4>SLパレオエクスプレス</h4>
+          <p>秩父鉄道を走る蒸気機関車。沿線からその勇姿を眺めるだけでも、旅の思い出になります。</p>
+          <span class="area-pet">沿線からの見学は自由（乗車時のルールは公式サイトへ）</span>
         </div>
       </div>
       <div class="area-card reveal">
-        <img src="./images/area-hodosan.jpg" alt="小型犬と一緒に山頂の絶景を楽しめる、宝登山ロープウェイ" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600&q=80'">
+        <img src="./images/area-hodosan.jpg" alt="秩父のシンボル・武甲山" loading="lazy" decoding="async">
         <div class="area-body">
-          <p class="area-dist">車で約30分（約16km）</p>
-          <h4>宝登山ロープウェイ</h4>
-          <p>長瀞観光に人気のロープウェイ。梅や桜など四季折々の花が咲き誇る宝登山山頂へ、小型犬を連れて登ることができます。</p>
-          <span class="area-pet">10kg未満・頭から隠れるハードケージ必要</span>
+          <p class="area-dist">市内各所から望めます</p>
+          <h4>壮大な武甲山</h4>
+          <p>秩父のシンボルとしてまちを見守る標高1,304mの霊峰。市街地のどこからでもその存在感ある姿を望めます。</p>
+          <span class="area-pet">まちなかの散歩中に望めます</span>
         </div>
       </div>
     </div>
@@ -1513,6 +1581,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3227.4090557658824!2d139.09302887624247!3d36.01030321182636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601ec96ee829cc71%3A0x640b720f72c62ccd!2z44CSMzY4LTAwMjMg5Z-8546J55yM56ep54i25biC5aSn5a6u77yV77yV77yS77yT4oiS77yZ!5e0!3m2!1sja!2sjp!4v1779760701019!5m2!1sja!2sjp" title="にこの家 地図" allowfullscreen="" loading="lazy">
         </iframe>
+        <button type="button" class="route-btn" id="routeBtn">現在地からお宿までの所要時間を算出</button>
+        <div class="route-result" id="routeResult" hidden>
+          <p class="rr-main"><span class="rr-time" id="rrTime">--</span><span class="rr-unit">（車でのおおよその目安）</span></p>
+          <p class="rr-sub" id="rrDist"></p>
+          <a class="rr-link" id="rrLink" href="#" target="_blank" rel="noopener">Googleマップで詳しいルートを見る →</a>
+        </div>
+        <p class="route-note" id="routeNote">現在地の取得を許可すると、車でのおおよその所要時間を表示します。</p>
       </div>
     </div>
   </div>
@@ -1526,40 +1601,76 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <h2 class="sec-title">よくあるご質問</h2>
     </div>
     
-    <div class="faq-item reveal">
-      <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
-        <span class="faq-q-text">どんな種類のペットを何頭まで連れていけますか？</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a">室内飼いされている犬（小型・中型・大型）、猫、うさぎ、フェレット、その他小動物であれば何頭でもご宿泊いただけます。頭数制限や、犬のサイズ（大型犬）による特別追加料金はありません。ご予約時に種類と頭数を事前にお知らせください。</div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
-        <span class="faq-q-text">ペットはベッドに上がってもいいですか？添い寝できますか？</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a">はい、もちろんです！寝室のロータイプマットレスへの立ち入り制限は一切ありません。ケージで眠らせる強制もありませんので、おうちと同じようにみんなで川の字になって添い寝をしていただけます。これが「にこの家」最大のこだわりです。</div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
-        <span class="faq-q-text">周辺にペットと一緒に食事を楽しめるレストランはありますか？</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a">はい、車で5分程度の距離にある古民家カフェ「doggie cafe SMOOCH」など、犬・猫同伴で入れる素敵なお店がいくつかあります。また、にこの家のキッチンにはコンロや冷蔵庫、食器類が完備されていますので、地元の道の駅等で秩父の食材を買い出して、宿で調理して食べることも人気です。</div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
-        <span class="faq-q-text">近くに、夜間対応などの動物病院はありますか？</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a">万が一の体調不良の際もご安心いただけるよう、秩父市内にある、ペットにやさしい複数の動物病院の連絡先をウェルカムガイド（宿内の手引き冊子）に掲載しております。緊急時やご不安な際はお電話でもお気軽にお問い合わせください。</div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
-        <span class="faq-q-text">連泊の割引やワーケーション利用は可能ですか？</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a">はい、2泊以上の長期滞在・中長期連泊の際は特別料金割引をご用意しています。室内には仕事がはかどる高速無料Wi-Fiや机を完備しており、ドッグランの横で愛犬を見守りながら静かに過ごすペット同伴のワーケーション利用も大歓迎です。</div>
+          <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          <span class="faq-q-text">にこの家では、どんな種類のペットを何頭まで連れていけますか？</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">秩父のペット民泊「にこの家」には頭数制限がなく、室内飼いの犬（小型・中型・大型）、猫、うさぎ、フェレットなどの小動物を、何頭でも一緒にご宿泊いただけます。頭数や犬のサイズによる追加料金もかかりません。</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          <span class="faq-q-text">犬と猫が一緒でも大丈夫ですか？</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">大丈夫です。にこの家は犬と猫など、種類の異なるペットの同時宿泊を歓迎しています。</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          <span class="faq-q-text">ペットはベッドに上がってもいいですか？添い寝できますか？</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">はい。にこの家では寝室のロータイプマットレスへの立ち入り制限が一切なく、ケージで眠らせる必要もありません。おうちと同じように、みんなで川の字になって添い寝していただけます。</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          <span class="faq-q-text">鳴き声で近隣に迷惑がかかりませんか？</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">にこの家では近隣住民の方に事前のご案内を済ませ、ご理解をいただいています。一棟貸切のため、他の宿泊客への気兼ねも不要です。</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          <span class="faq-q-text">チェックイン・チェックアウトの時間を教えてください。</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">にこの家のチェックインは15:00、チェックアウトは10:00です。セルフチェックイン方式のため、到着後すぐにご家族だけの時間を過ごせます。</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          <span class="faq-q-text">人間だけの宿泊もできますか？</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">可能です。にこの家はペット連れでない方もご利用いただける一棟貸しの宿です。</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          <span class="faq-q-text">ペットが粗相をしてしまった場合はどうなりますか？</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">にこの家では清掃道具をご用意していますので、清掃にご協力をお願いします。ご不安な場合はマナーパンツ等の着用がおすすめです。著しい破損や特別な清掃が必要な場合は、別途費用を請求させていただく可能性があります。</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          <span class="faq-q-text">周辺にペットと一緒に食事を楽しめるレストランはありますか？</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">にこの家の周辺には、車で5分ほどの距離にペット同伴で入れる飲食店がいくつかあります。またキッチンにコンロ・冷蔵庫・食器類を完備していますので、地元で買った秩父の食材を宿で調理して楽しむ滞在も人気です。</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          <span class="faq-q-text">近くに、夜間対応などの動物病院はありますか？</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">にこの家では、万が一の体調不良に備えて秩父市内のペットにやさしい複数の動物病院の連絡先を、宿内のウェルカムガイドに掲載しています。緊急時やご不安な際はお電話でもお気軽にお問い合わせください。</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          <span class="faq-q-text">連泊の割引やワーケーション利用は可能ですか？</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">はい。にこの家では2泊以上の長期滞在に特別料金の割引をご用意しています。室内には高速無料Wi-Fiと机を備えており、ガーデンの横で愛犬を見守りながら過ごすワーケーション利用も歓迎しています。</div>
+      </div>
     </div>
   </div>
 </section>
@@ -1736,6 +1847,41 @@ document.querySelectorAll('.prevent-desktop-link').forEach(link => {
     }
   });
 });
+</script>
+<script>
+(function(){
+  var btn=document.getElementById('routeBtn'), note=document.getElementById('routeNote'),
+      box=document.getElementById('routeResult'), tEl=document.getElementById('rrTime'),
+      dEl=document.getElementById('rrDist'), link=document.getElementById('rrLink');
+  if(!btn) return;
+  var DLAT=35.9924, DLNG=139.0855, ADDR=encodeURIComponent('埼玉県秩父市大宮5523-9');
+  function hav(a,b,c,d){var R=6371,r=Math.PI/180,x=(c-a)*r,y=(d-b)*r,
+    h=Math.sin(x/2)*Math.sin(x/2)+Math.cos(a*r)*Math.cos(c*r)*Math.sin(y/2)*Math.sin(y/2);
+    return R*2*Math.atan2(Math.sqrt(h),Math.sqrt(1-h));}
+  function fmt(m){m=Math.round(m);if(m<60)return m+'分';return Math.floor(m/60)+'時間'+(m%60?(m%60)+'分':'');}
+  function show(min,km,lat,lng,est){
+    tEl.textContent='約'+fmt(min);
+    dEl.textContent='距離：約'+km.toFixed(0)+'km';
+    link.href='https://www.google.com/maps/dir/?api=1&origin='+lat+','+lng+'&destination='+ADDR+'&travelmode=driving';
+    box.hidden=false;
+    note.textContent=est?'※直線距離からの概算です。実際の所要時間は交通状況により変わります。':'※交通状況により変わります。詳細はGoogleマップでご確認ください。';
+    btn.disabled=false; btn.textContent='もう一度計算する';
+  }
+  btn.addEventListener('click',function(){
+    if(!navigator.geolocation){note.textContent='この端末では現在地を取得できません。';return;}
+    btn.disabled=true; btn.textContent='計算しています…';
+    navigator.geolocation.getCurrentPosition(function(p){
+      var la=p.coords.latitude, ln=p.coords.longitude;
+      fetch('https://router.project-osrm.org/route/v1/driving/'+ln+','+la+';'+DLNG+','+DLAT+'?overview=false')
+        .then(function(r){return r.json();})
+        .then(function(j){ if(j.routes&&j.routes[0]){show(j.routes[0].duration/60,j.routes[0].distance/1000,la,ln,false);} else {throw 0;} })
+        .catch(function(){ var km=hav(la,ln,DLAT,DLNG)*1.3; show(km/45*60,km,la,ln,true); });
+    },function(){
+      btn.disabled=false; btn.textContent='現在地からお宿までの所要時間を算出';
+      note.textContent='現在地を取得できませんでした。位置情報の許可設定をご確認ください。';
+    },{enableHighAccuracy:false,timeout:8000,maximumAge:300000});
+  });
+})();
 </script>
 </body>
 </html>
