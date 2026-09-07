@@ -277,8 +277,7 @@ header.scrolled {
   position: absolute; inset: 0;
   background:
     linear-gradient(to right, rgba(250,248,244,0.92) 38%, rgba(250,248,244,0.3) 100%),
-    url('./images/hero-bg.jpg') center/cover no-repeat,
-    url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1800&q=80') center/cover no-repeat;
+    url('./images/hero-bg.jpg') center/cover no-repeat;
 }
 .hero-content {
   position: relative;
@@ -1089,8 +1088,7 @@ footer {
   .hero-bg {
     background:
       linear-gradient(to bottom, rgba(250,248,244,0.85) 50%, rgba(250,248,244,0.5) 100%),
-      url('./images/hero-bg.jpg') center/cover,
-      url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=900&q=80') center/cover;
+      url('./images/hero-bg.jpg') center/cover;
   }
   .hero-content { padding: 0 1.2rem; }
   .concept-inner, .story-inner, .labo-inner, .access-inner { grid-template-columns: 1fr; gap: 2rem; }
@@ -1202,6 +1200,41 @@ img { max-width: 100%; }
 .room-card img { aspect-ratio: 3/2; height: auto !important; }
 .area-card img { aspect-ratio: 3/2; height: auto !important; }
 .pm-card img { aspect-ratio: 3/2; height: auto !important; }
+
+/* === モバイル固定CTA（スマホのみ表示） === */
+.sticky-cta { display: none; }
+@media (max-width: 768px) {
+  .sticky-cta {
+    display: block;
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 200;
+    padding: 0.7rem 1rem calc(0.7rem + env(safe-area-inset-bottom));
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid var(--linen);
+    transform: translateY(120%);
+    transition: transform 0.28s ease;
+  }
+  .sticky-cta.is-visible { transform: translateY(0); }
+  .sticky-cta-btn {
+    display: block;
+    text-align: center;
+    background: var(--terra);
+    color: #fff;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    padding: 15px 20px;
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(208,114,47,0.32);
+  }
+  .sticky-cta-btn:active { background: var(--terra-dk); }
+  /* 固定バーがフッターに重ならないよう余白を確保 */
+  body { padding-bottom: 76px; }
+}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1287,9 +1320,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <div class="concept-inner">
       <div class="concept-imgs reveal">
-        <img src="./images/concept-main.jpg" alt="ベッドの上でくつろぐ看板犬にこ" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=900&q=80'" width="1400" height="933">
-        <img src="./images/concept-nico.jpg" alt="大きなソファを置いた、にこの家のリビング" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80'" width="600" height="399">
-        <img src="./images/concept-dogrun.jpg" alt="ウッドフェンスと灯りに包まれた、夜のプライベートガーデン" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600&q=80'" width="600" height="450">
+        <img src="./images/concept-main.jpg" alt="ベッドの上でくつろぐ看板犬にこ" loading="lazy" decoding="async" width="1400" height="933">
+        <img src="./images/concept-nico.jpg" alt="大きなソファを置いた、にこの家のリビング" loading="lazy" decoding="async" width="600" height="399">
+        <img src="./images/concept-dogrun.jpg" alt="ウッドフェンスと灯りに包まれた、夜のプライベートガーデン" loading="lazy" decoding="async" width="600" height="450">
       </div>
       <div class="reveal">
         <p class="sec-eyebrow">About</p>
@@ -1319,7 +1352,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <div class="story-inner">
       <div class="story-img reveal">
-        <img src="./images/owner-story.jpg" alt="おもちゃで遊ぶ、にこの家の看板犬にこ" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&q=80'" width="1200" height="800">
+        <img src="./images/owner-story.jpg" alt="おもちゃで遊ぶ、にこの家の看板犬にこ" loading="lazy" decoding="async" width="1200" height="800">
       </div>
       <div class="reveal">
         <p class="sec-eyebrow">Owner's Story</p>
@@ -1415,7 +1448,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       <div class="labo-img reveal">
-        <img src="./images/labo-concept.jpg" alt="押し入れを改装した、猫のためのキャットステップ" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=800&q=80'" width="1200" height="800">
+        <img src="./images/labo-concept.jpg" alt="押し入れを改装した、猫のためのキャットステップ" loading="lazy" decoding="async" width="1200" height="800">
       </div>
     </div>
   </div>
@@ -1430,7 +1463,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="rooms-grid">
       <div class="room-card reveal">
-        <img src="./images/room-living.jpg" alt="木の天井と板張りに包まれた、にこの家のダイニング" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=900&q=80'" width="1200" height="800">
+        <img src="./images/room-living.jpg" alt="木の天井と板張りに包まれた、にこの家のダイニング" loading="lazy" decoding="async" width="1200" height="800">
         <div class="room-body">
           <p class="room-label">Living & Dining</p>
           <h3>リビング・ダイニング</h3>
@@ -1438,7 +1471,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       <div class="room-card reveal">
-        <img src="./images/room-bedroom.jpg" alt="布団を並べてペットと添い寝ができる、にこの家の寝室" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?w=900&q=80'" width="1200" height="800">
+        <img src="./images/room-bedroom.jpg" alt="布団を並べてペットと添い寝ができる、にこの家の寝室" loading="lazy" decoding="async" width="1200" height="800">
         <div class="room-body">
           <p class="room-label">Bedroom</p>
           <h3>寝室（2室）</h3>
@@ -1446,7 +1479,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       <div class="room-card reveal">
-        <img src="./images/room-dogrun.jpg" alt="ウッドフェンスに囲まれた、人工芝のプライベートドッグラン" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=900&q=80'" width="1200" height="800">
+        <img src="./images/room-dogrun.jpg" alt="ウッドフェンスに囲まれた、人工芝のプライベートドッグラン" loading="lazy" decoding="async" width="1200" height="800">
         <div class="room-body">
           <p class="room-label">Dog Run</p>
           <h3>プライベートドッグラン</h3>
@@ -1454,11 +1487,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       <div class="room-card reveal">
-        <img src="./images/room-kitchen.jpg" alt="白タイルが映える、調理器具完備のキッチン" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&q=80'" width="1200" height="800">
+        <img src="./images/room-balcony.jpg" alt="秩父の緑を望む、にこの家のバルコニー" loading="lazy" decoding="async" width="1200" height="800">
         <div class="room-body">
-          <p class="room-label">Kitchen</p>
-          <h3>フルキッチン</h3>
-          <p>3つ口ガスコンロ・冷蔵庫・電子レンジ・炊飯器・オーブントースター・電気ケトル・食器類一式完備。ペットのごはん作りやご家族のお料理を楽しめます。</p>
+          <p class="room-label">Balcony</p>
+          <h3>開放的なバルコニー</h3>
+          <p>2階には秩父の緑を望むバルコニー。テーブルとチェアを備え、朝はコーヒーを、夜は灯りをともして。ペットと並んで外の空気を味わえる特等席です。</p>
         </div>
       </div>
     </div>
@@ -2055,6 +2088,29 @@ document.querySelectorAll('.prevent-desktop-link').forEach(link => {
     var h=document.documentElement;
     if((h.scrollTop+window.innerHeight)/h.scrollHeight >= 0.75){ fired=true; ev('scroll_75', {lp_name:LP}); }
   }, {passive:true});
+})();
+</script>
+
+<!-- MOBILE STICKY CTA -->
+<div class="sticky-cta" id="stickyCta" aria-hidden="true">
+  <a class="sticky-cta-btn" data-cta="sticky" href="https://nicoshouse.airhost.co/ja" target="_blank" rel="noopener">空室を見る</a>
+</div>
+<script>
+(function(){
+  var bar = document.getElementById('stickyCta');
+  if(!bar) return;
+  var hero = document.querySelector('.hero') || document.querySelector('header');
+  var reserve = document.getElementById('reserve');
+  function update(){
+    // ヒーローを抜けたら出す。予約セクション到達で引っ込める（二重表示を避ける）
+    var passedHero = hero ? (hero.getBoundingClientRect().bottom < 0) : (window.scrollY > 400);
+    var atReserve  = reserve ? (reserve.getBoundingClientRect().top < window.innerHeight * 0.9) : false;
+    bar.classList.toggle('is-visible', passedHero && !atReserve);
+    bar.setAttribute('aria-hidden', (passedHero && !atReserve) ? 'false' : 'true');
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  window.addEventListener('resize', update);
+  update();
 })();
 </script>
 </body>
